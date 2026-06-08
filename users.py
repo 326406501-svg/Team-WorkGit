@@ -17,10 +17,9 @@ def  save_users(users):
 #בדיקה מוצלחת
 
 def get_next_id(users):
-    if len(users)==0:
-        return 1
-    else:
-        return users[-1]["id"]+1
+    max_id = max([user_data["id"] for user_data in users.values()], default=0)
+    return max_id + 1
+
 #print(get_next_id(users))
 #בדיקה מוצלחת
 
@@ -28,7 +27,7 @@ def register_user():
     users=load_users()
     while True:
         username = input("enter username: ")
-        if any(user["username"] == username for user in users):
+        if username in users:
             print("Username already exists! Please choose another one.")
         else:
             break  
@@ -40,14 +39,13 @@ def register_user():
             print("Invalid password! Must be between 6 and 10 characters.")
     while True:
         email = input("enter email: ")
-        if any(user["email"] == email for user in users):
+        if any(user_data["email"] == email for user_data in users.values()):
             print("Email already exists! Please choose another one.")
         else:
             break   
 
     user_id=get_next_id(users)
-    new_user={"id":user_id,"username":username,"password":password,"email":email}
-    users.append(new_user)
+    users[username] = {"id": user_id,"password": password,"email": email}
     save_users(users)
     print("User registered successfully")
 
@@ -57,14 +55,12 @@ def register_user():
 def login_user():
     users = load_users()
     username_input = input("Enter username to login: ")
-    for user in users:
-        if user["username"] == username_input:
-            password_input = input("Enter password: ")
-            if user["password"] == password_input:
-                print(f"Login successful! Welcome back, {username_input}.")
-            else:
-                print("Error: Incorrect password!")
-            return
+    if username_input in users: 
+        password_input = input("Enter password: ")
+        if users[username_input]["password"] == password_input: 
+            print(f"Login successful! Welcome back, {username_input}.")
+        else:
+            print("Error: Incorrect password!")
     else:
         print("Error: Username does not exist!")
 
