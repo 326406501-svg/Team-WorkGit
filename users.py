@@ -1,6 +1,9 @@
 #הרשמה והתחברות
 #שם  משתמש,סיסמה,גימייל
 import json
+import jwt
+import datetime
+SECRET_KEY = "my_super_secret_key"
 def load_users(): 
     with open ("users.json","r",encoding="utf-8") as file:
         return json.load(file)
@@ -45,11 +48,11 @@ def register_user():
             break   
 
     user_id=get_next_id(users)
-    users[username] = {"id": user_id,"password": password,"email": email}
+    users[username] = {"id": user_id,"password": password,"email": email,"role":"user"}
     save_users(users)
     print("User registered successfully")
 
-#register_user()
+register_user()
 #בדיקה מוצלחת(שולל שם משתמש זהה,סיסמה שהיא לא בין 6-10 תווים ושולל גימייל שונה)
 
 def login_user():
@@ -59,6 +62,14 @@ def login_user():
         password_input = input("Enter password: ")
         if users[username_input]["password"] == password_input: 
             print(f"Login successful! Welcome back, {username_input}.")
+            payload = {
+                "user_id": users[username_input]["id"],
+                "username": username_input,
+                "role": users[username_input].get("role", "user"),  
+                "exp": datetime.datetime.now(datetime.timezone.utc) + datetime.timedelta(hours=1)}
+            token = jwt.encode(payload, SECRET_KEY, algorithm="HS256")
+            print(f"Your JWT Token:\n{token}\n")
+            return token
         else:
             print("Error: Incorrect password!")
     else:

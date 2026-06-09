@@ -1,3 +1,26 @@
 {
-
+    "guy": {
+        "id": 1,
+        "password": "guygo77",
+        "email": "guycheck@gmail.com",
+        "role": "admin"
+    },
+    "elad": {
+        "id": 2,
+        "password": "guguuf45",
+        "email": "hjh@gmail.com",
+        "role": "admin"
+    },
+    "aviv": {
+        "id": 3,
+        "password": "gjggy66",
+        "email": "hjvhgft@gmail.com",
+        "role": "admin"
+    },
+    "gil": {
+        "id": 4,
+        "password": "fyfthft666",
+        "email": "ghhgft@gmail.com",
+        "role": "user"
+    }
 }
