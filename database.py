@@ -10,7 +10,7 @@ connection = psycopg2.connect(
     host = "localhost",
     database = "news_db",
     user = "postgres",
-    password = "your password"
+    password = "Dallal007!"
 )
 
 
@@ -23,8 +23,23 @@ cursor.execute("""
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
-    password VARCHAR(255) NOT NULL
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) UNIQUE,
+    role VARCHAR(20) DEFAULT 'user'
 );
+""")
+
+
+# אם הטבלה כבר הייתה קיימת לפני שהוספנו email ו-role,
+# הפקודות האלו מוסיפות את העמודות החסרות בלי למחוק מידע קיים
+cursor.execute("""
+ALTER TABLE users
+ADD COLUMN IF NOT EXISTS email VARCHAR(100) UNIQUE;
+""")
+
+cursor.execute("""
+ALTER TABLE users
+ADD COLUMN IF NOT EXISTS role VARCHAR(20) DEFAULT 'user';
 """)
 
 

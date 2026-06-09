@@ -37,12 +37,10 @@ def fetch_news_by_category(category):
         "apiKey": API_KEY,
         "category": category,
         "language": "en",
-        # מספר הכתבות שהוא מוציא כרגע 10 כתבות
         "pageSize": 10
     }
 
     try:
-
         # שליחת בקשה ל-NewsAPI
         response = requests.get(url, params=params)
 
@@ -55,9 +53,9 @@ def fetch_news_by_category(category):
         # רשימת הכתבות שנחזיר למשתמש
         articles = []
 
-        # לוקח את כל הכתבות שהגיעו מה-API ועובר עליהן אחת אחת
+        # data מכיל את כל המידע שחזר מה-API
+        # כאן אנחנו עוברים על כל כתבה בנפרד כדי לקחת ממנה את המידע שאנחנו צריכים
         for article in data.get("articles", []):
-
             articles.append({
                 "title": article.get("title"),
                 "description": article.get("description"),
@@ -70,7 +68,6 @@ def fetch_news_by_category(category):
         return articles
 
     except requests.exceptions.RequestException:
-
         raise HTTPException(
             status_code=500,
             detail="Failed to fetch news"
@@ -85,7 +82,6 @@ def fetch_news_by_multiple_categories(categories):
 
     # מעבר על כל הקטגוריות
     for category in categories:
-
         articles = fetch_news_by_category(category)
 
         # הוספת הכתבות לרשימה אחת גדולה

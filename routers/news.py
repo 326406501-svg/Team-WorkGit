@@ -35,6 +35,7 @@ def get_categories():
 # /news/multiple/categories?categories=sports,technology
 @router.get("/multiple/categories")
 def get_news_by_multiple_categories(categories: str):
+
     selected_categories = categories.split(",")
 
     articles = fetch_news_by_multiple_categories(selected_categories)
@@ -50,7 +51,9 @@ def get_news_by_multiple_categories(categories: str):
 # /news/sports
 @router.get("/{category}")
 def get_news_by_category(category: str):
+
     articles = fetch_news_by_category(category)
+
     return {
         "category": category,
         "articles": articles
