@@ -77,3 +77,24 @@ def login_user():
 
 #login_user()
 #בדיקה מוצלחת (שם משתמש קיים,סיסמה נכונה)
+def delete_user_account(token):
+    try:
+        decoded_payload = jwt.decode(token, SECRET_KEY, algorithms=["HS256"])
+        if decoded_payload.get("role") == "admin":
+            print(f"\n--- Access Granted (Admin: {decoded_payload['username']}) ---")
+            users = load_users()
+            user_to_delete = input("Enter username to delete: ")
+
+            if user_to_delete in users:
+                del users[user_to_delete]
+                save_users(users)
+                print(f"User '{user_to_delete}' has been deleted successfully.")
+            else:
+                print("Error: Username to delete does not exist.")
+        else:         
+            print("Access Denied! Only admins can perform this action.")
+            
+    except jwt.ExpiredSignatureError:
+        print("Error: Your session has expired! Please login again.")
+    except jwt.InvalidTokenError:
+        print("Error: Invalid Token! Access blocked.")
