@@ -1,0 +1,50 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live News Feed for {{username}}</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <script src="https://unpkg.com"></script>
+    <link rel="stylesheet" href="/staticGit/user_search.css">
+</head>
+<body>
+
+    <div class="welcome-header">
+        <div class="user-badge">
+            <i data-lucide="user"></i>
+            <span>Active Session: {{username}}</span>
+        </div>
+        <h1>Welcome Back, <span>{{username}}</span></h1>
+        <h2><i data-lucide="sparkles"></i> Here is the latest customized news for you</h2>
+    </div>
+
+    <div class="news-container">
+        {% for d in data %}
+        <div class="news-card">
+            <div class="card-header">
+                <span class="topic-tag">
+                    <i data-lucide="hash"></i> Topic
+                </span>
+                <span class="time-stamp">
+                    <i data-lucide="clock"></i> Just now
+                </span>
+            </div>
+            
+            <h3>{{d["title"]}}</h3>
+            <p>{{d["description"]}}</p>
+            
+            <div class="card-footer">
+                <a href="#" class="read-more-btn">
+                    Go up <i data-lucide="arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>

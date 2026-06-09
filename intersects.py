@@ -6,6 +6,10 @@ from fastapi.responses import FileResponse
 from fastapi.templating import Jinja2Templates
 import json
 from datetime import datetime
+from news_service import fetch_news_by_category
+router = APIRouter()
+templates = Jinja2Templates(directory=r'C:\Users\Z\Documents\Team-git-project\Team-WorkGit\staticGit')
+
 def create_json_intersets_file():
  with open(r'intersects.json' ,'w') as file :
     json.dump({},file)
@@ -18,6 +22,8 @@ def read_json_intersets_file():
 def write_to_json_file(x):
   with open(r'intersects.json' ,'w') as file :
     json.dump(x,file)
+
+
 def user_interests(username,interest_category):
     list_of_users=read_json_intersets_file()
     current_time_str = datetime.now().isoformat()
@@ -43,3 +49,11 @@ def user_interests(username,interest_category):
       list_of_users[username]=user_profile
       write_to_json_file(list_of_users)
 user_interests("tomer","sport")
+
+@router.post("/data",response_class=HTMLResponse)
+def show_data_in_html (request:Request,username:str = Form(...),password:int = Form(...)):
+     data=read_json_intersets_file()
+     return templates.TemplateResponse(
+          request=request, 
+          name="best_intersects.html", 
+          context={"username":username,"user_profile":data[username]})
