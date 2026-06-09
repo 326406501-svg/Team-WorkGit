@@ -11,8 +11,11 @@ from intersects import user_interests
 router = APIRouter()
 templates = Jinja2Templates(directory=r'C:\Users\Z\Documents\Team-git-project\Team-WorkGit\staticGit')
 from news_service import fetch_news_by_category
+
+
 @router.post("/search_user",response_class=HTMLResponse)
 def show_user_search(request:Request,username:str = Form(...),category:str = Form(...)):
+  #save the user 
   user_interests(username,category)
   data=fetch_news_by_category(category)
   return templates.TemplateResponse(

@@ -146,7 +146,9 @@ body {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
     padding-top: 1rem;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
 }
 
 .read-more-btn {
@@ -179,6 +181,51 @@ body {
 
 .news-card:hover .read-more-btn i {
     transform: translateX(4px);
+}
+
+.form-div.personal-form {
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+/* Explicit button targeting to force styling overrides */
+.form-div.personal-form button {
+    background: none !important;
+    border: none !important;
+    outline: none !important;
+    padding: 0 !important;
+    color: #818cf8;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+    font-family: inherit;
+    text-transform: capitalize;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+/* FIX: Targets both the tag and the generated SVG icon from Lucide */
+.form-div.personal-form button i,
+.form-div.personal-form button svg {
+    width: 16px !important;
+    height: 16px !important;
+    transition: transform 0.2s ease;
+}
+
+.form-div.personal-form button:hover {
+    color: #34d399;
+}
+
+.form-div.personal-form button:hover i,
+.form-div.personal-form button:hover svg {
+    transform: translateY(-2px);
+}
+
+.form-div.personal-form button:active {
+    transform: scale(0.95);
 }
 
 @keyframes fadeInDown {

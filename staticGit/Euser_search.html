@@ -1,4 +1,4 @@
-!DOCTYPE html>
+html<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -38,6 +38,15 @@
                 <a href="#" class="read-more-btn">
                     Go up <i data-lucide="arrow-right"></i>
                 </a>
+
+                <iframe name="hidden_save_frame" style="display:none;"></iframe>
+                <form action="/data_save" method="post" class="form-div personal-form" target="hidden_save_frame">
+                     <input type="hidden" name="username" value="{{username}}">
+                     <input type="hidden" name="title" value="{{d['title']}}">
+                     <input type="hidden" name="description" value="{{d['description']}}">
+            
+                    <button type="submit"><i data-lucide="bookmark"></i> save this post</button>
+                </form>
             </div>
         </div>
         {% endfor %}

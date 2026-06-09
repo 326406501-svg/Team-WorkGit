@@ -23,6 +23,18 @@ def write_to_json_file(x):
   with open(r'intersects.json' ,'w') as file :
     json.dump(x,file)
 
+#save file in json
+def create_json_save__post_file():
+ with open(r'save_post.json' ,'w') as file :
+    json.dump({},file)
+
+def read_json_save__post_file():
+ with open(r'save_post.json' ,'r') as file :
+   return  json.load(file)
+def write_to_save_post_file(x):
+  with open(r'save_post.json' ,'w') as file :
+    json.dump(x,file)
+
 
 def user_interests(username,interest_category):
     list_of_users=read_json_intersets_file()
@@ -53,7 +65,22 @@ user_interests("tomer","sport")
 @router.post("/data",response_class=HTMLResponse)
 def show_data_in_html (request:Request,username:str = Form(...),password:int = Form(...)):
      data=read_json_intersets_file()
+     save_posts=read_json_save__post_file()
+     user_profile = data.get(username, {})
+     user_posts = save_posts.get(username, {}) 
      return templates.TemplateResponse(
           request=request, 
-          name="best_intersects.html", 
-          context={"username":username,"user_profile":data[username]})
+          name="user_history.html", 
+          context={"username":username,"user_profile": user_profile,"save_posts": user_posts})
+     
+@router.post("/data_save")
+def save_data_in_html (username:str = Form(...), title:str = Form(...),description:str= Form(...)):
+     list_of_users=read_json_save__post_file()
+     if username not in list_of_users:
+       list_of_users[username]={
+         title:description
+       }
+     else:
+           user_profile=list_of_users[username]
+           user_profile[title]=description
+     write_to_save_post_file(list_of_users)
