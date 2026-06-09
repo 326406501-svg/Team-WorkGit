@@ -34,7 +34,10 @@ def read_json_save__post_file():
 def write_to_save_post_file(x):
   with open(r'save_post.json' ,'w') as file :
     json.dump(x,file)
-
+#get_uesers_password
+def get_uesers_password_and_username():
+ with open(r'C:\Users\Z\Documents\Team-git-project\Team-WorkGit\users.json' ,'r') as file :
+   return  json.load(file)
 
 def user_interests(username,interest_category):
     
@@ -65,6 +68,8 @@ user_interests("tomer","sport")
 
 @router.post("/data",response_class=HTMLResponse)
 def show_data_in_html (request:Request,username:str = Form(...),password:int = Form(...)):
+    list_of_users=get_uesers_password_and_username()
+    if username in list_of_users and list_of_users[username]["password"]==password:
      data=read_json_intersets_file()
      save_posts=read_json_save__post_file()
      user_profile = data.get(username, {})
@@ -73,7 +78,8 @@ def show_data_in_html (request:Request,username:str = Form(...),password:int = F
           request=request, 
           name="user_history.html", 
           context={"username":username,"user_profile": user_profile,"save_posts": user_posts})
-     
+    else:
+      return get_status("invalid username or password",request)
 @router.post("/data_save")
 def save_data_in_html (username:str = Form(...), title:str = Form(...),description:str= Form(...)):
      list_of_users=read_json_save__post_file()
