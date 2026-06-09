@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notice / Alert</title>
+    <!-- קישור לקובץ העיצוב הגלובלי שלך כדי לקבל את הרקע והגופנים -->
+    <link rel="stylesheet" href="/staticGit/status.css">
+</head>
+<body>
+
+    <div class="welcome-header" style="margin-top: 4rem;">
+        <div class="user-badge" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171;">
+            ⚠️ System Notification
+        </div>
+        <h1>Action <span>Required</span></h1>
+    </div>
+
+    <div class="news-container" style="max-width: 520px;">
+        <div class="news-card" style="text-align: center; border-color: rgba(239, 68, 68, 0.2);">
+            
+            <!-- הצגת הודעת השגיאה שמתקבלת מה-Python -->
+            <p style="font-size: 1.2rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 2rem; font-weight: 500;">
+                {{ status_code }}
+            </p>
+            
+            <!-- כפתור חזרה מעוצב ללא גבולות שתואם לחלוטין לקוד ה-CSS שלך -->
+            <div class="card-footer" style="justify-content: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem;">
+                <a href="/" class="read-more-btn" style="font-size: 1rem; color: #818cf8; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 0.5rem;">
+                    ↩️ Go Back to Home Page
+                </a>
+            </div>
+
+        </div>
+    </div>
+
+</body>
+</html>

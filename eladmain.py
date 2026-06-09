@@ -6,16 +6,19 @@ from fastapi.templating import Jinja2Templates
 from intersects import router as intersects_router
 from Eshow_users_search import router as show_users_search
 import uvicorn
+from users import router as register_router
 app = FastAPI()
 app.mount("/static", StaticFiles(directory=r"C:\Users\Z\Documents\Team-git-project\Team-WorkGit\staticGit"), name="staticGit")
 templates = Jinja2Templates(directory=r'C:\Users\Z\Documents\Team-git-project\Team-WorkGit\staticGit')
 app.include_router(intersects_router)
 app.include_router(show_users_search)
+app.include_router(register_router)
 app.mount("/staticGit",StaticFiles(directory=r'C:\Users\Z\Documents\Team-git-project\Team-WorkGit\staticGit'),name="staticGit")
 @app.get("/",response_class=HTMLResponse)
 async def root(request: Request):
   return templates.TemplateResponse(
           request=request, 
-          name="index.html" )
+          name="register.html" )
+
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)

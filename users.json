@@ -22,5 +22,17 @@
         "password": "fyfthft666",
         "email": "ghhgft@gmail.com",
         "role": "user"
+    },
+    "Elad": {
+        "id": 5,
+        "password": "123456",
+        "email": "326406501@ziv-school.com",
+        "role": "user"
+    },
+    "yoni": {
+        "id": 6,
+        "password": "1111111",
+        "email": "32640653301@ziv-school.com",
+        "role": "user"
     }
 }

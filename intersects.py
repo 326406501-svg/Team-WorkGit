@@ -37,6 +37,7 @@ def write_to_save_post_file(x):
 
 
 def user_interests(username,interest_category):
+    
     list_of_users=read_json_intersets_file()
     current_time_str = datetime.now().isoformat()
     #if its the first time of the user to connect
@@ -84,3 +85,14 @@ def save_data_in_html (username:str = Form(...), title:str = Form(...),descripti
            user_profile=list_of_users[username]
            user_profile[title]=description
      write_to_save_post_file(list_of_users)
+
+def get_status(status:str,request:Request):
+     return templates.TemplateResponse(
+          request=request, 
+          name="status.html", 
+          context={"status_code":status})
+
+@router.get("/login", response_class=HTMLResponse)
+def show_login_page(request: Request):
+    # 2. הכתובת /login תציג את הדף הישן שלך
+    return templates.TemplateResponse(request=request, name="index.html")

@@ -1,9 +1,23 @@
-#הרשמה והתחברות
-#שם  משתמש,סיסמה,גימייל
+#הרשמהfrom pydantic import   BaseModel
+from fastapi import APIRouter,FastAPI, Form, Depends,Request
+from fastapi.responses import RedirectResponse,HTMLResponse
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
+from fastapi.templating import Jinja2Templates
 import json
-import jwt
+from datetime import datetime
+from news_service import fetch_news_by_category
+from intersects import user_interests
+router = APIRouter()
+templates = Jinja2Templates(directory=r'C:\Users\Z\Documents\Team-git-project\Team-WorkGit\staticGit')
+from news_service import fetch_news_by_category
+import json
+# import jwt
 import datetime
 SECRET_KEY = "my_super_secret_key"
+from intersects import get_status
+from intersects import user_interests
+
 def load_users(): 
     with open ("users.json","r",encoding="utf-8") as file:
         return json.load(file)
@@ -25,35 +39,32 @@ def get_next_id(users):
 
 #print(get_next_id(users))
 #בדיקה מוצלחת
+@router.post('/register', response_class=HTMLResponse)
+def register_user(
+    request: Request, 
+    username: str = Form(...), 
+    password: str = Form(...), 
+    email: str = Form(...)
+):
+    users = load_users()
+    
+    if username in users:
+        # 1. Added request as the first argument
+        return get_status( "Username already exists! Please choose another one.",request)
+        
+    elif len(password) < 6 or len(password) > 10:
+        return get_status( "Invalid password! Must be between 6 and 10 characters.",request)
+        
+    elif any(user_data["email"] == email for user_data in users.values()):
+        return get_status( "Email already exists! Please choose another one.",request)
+        
+    else:
+        user_id = get_next_id(users)
+        users[username] = {"id": user_id, "password": password, "email": email, "role": "user"}
+        save_users(users)
+        
+        return templates.TemplateResponse(request=request, name="index.html")   
 
-def register_user():
-    users=load_users()
-    while True:
-        username = input("enter username: ")
-        if username in users:
-            print("Username already exists! Please choose another one.")
-        else:
-            break  
-    while True:
-        password = input("enter password (6-10 characters): ")
-        if 6 <= len(password) <= 10:
-            break
-        else:  
-            print("Invalid password! Must be between 6 and 10 characters.")
-    while True:
-        email = input("enter email: ")
-        if any(user_data["email"] == email for user_data in users.values()):
-            print("Email already exists! Please choose another one.")
-        else:
-            break   
-
-    user_id=get_next_id(users)
-    users[username] = {"id": user_id,"password": password,"email": email,"role":"user"}
-    save_users(users)
-    print("User registered successfully")
-
-register_user()
-#בדיקה מוצלחת(שולל שם משתמש זהה,סיסמה שהיא לא בין 6-10 תווים ושולל גימייל שונה)
 
 def login_user():
     users = load_users()
