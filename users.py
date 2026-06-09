@@ -52,7 +52,7 @@ def register_user():
     save_users(users)
     print("User registered successfully")
 
-register_user()
+#register_user()
 #בדיקה מוצלחת(שולל שם משתמש זהה,סיסמה שהיא לא בין 6-10 תווים ושולל גימייל שונה)
 
 def login_user():
