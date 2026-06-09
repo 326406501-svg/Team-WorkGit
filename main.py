@@ -1,3 +1,6 @@
+# קובץ ראשי של הפרויקט
+# אחראי על הרמת שרת FastAPI וחיבור ה-Routers
+
 from fastapi import FastAPI
 from routers import news
 

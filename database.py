@@ -1,14 +1,24 @@
+# קובץ החיבור למסד הנתונים
+# אחראי על התחברות ל-PostgreSQL
+# ועל יצירת הטבלאות הראשוניות של הפרויקט
+
 import psycopg2
 
+
+# יצירת חיבור למסד הנתונים
 connection = psycopg2.connect(
-    host="localhost",
-    database="news_db",
-    user="postgres",
-    password="Dallal007!"
+    host = "localhost",
+    database = "news_db",
+    user = "postgres",
+    password = "your password"
 )
 
+
+# יצירת cursor שמאפשר להריץ פקודות SQL
 cursor = connection.cursor()
 
+
+# יצירת טבלת משתמשים אם היא עדיין לא קיימת
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
@@ -17,6 +27,8 @@ CREATE TABLE IF NOT EXISTS users (
 );
 """)
 
+
+# יצירת טבלת תחומי עניין אם היא עדיין לא קיימת
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS interests (
     id SERIAL PRIMARY KEY,
@@ -25,9 +37,13 @@ CREATE TABLE IF NOT EXISTS interests (
 );
 """)
 
+
+# שמירת השינויים במסד הנתונים
 connection.commit()
 
 print("Tables created successfully")
 
+
+# סגירת החיבור למסד בצורה מסודרת
 cursor.close()
 connection.close()
