@@ -94,7 +94,7 @@ def fetch_news_by_category(category):
             return []
 
         # כאן אנחנו עוברים על 10 הכתבות הראשונות ומסדרים אותן למבנה פשוט וברור
-        for article in results[:10]:
+        for article in results[:100]:
             articles.append(
                 format_article(article, category)
             )
