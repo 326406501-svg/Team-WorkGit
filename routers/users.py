@@ -33,8 +33,8 @@ def register_user(user: UserRegister):
         connection.close()
 
         raise HTTPException(
-            status_code=400,
-            detail="Username or email already exists"
+            status_code = 400,
+            detail = "Username or email already exists"
         )
 
     cursor.execute("""
@@ -75,8 +75,8 @@ def login_user(user: UserLogin):
 
     if existing_user is None:
         raise HTTPException(
-            status_code=404,
-            detail="Username does not exist"
+            status_code = 404,
+            detail = "Username does not exist"
         )
 
     user_id = existing_user[0]
@@ -86,14 +86,14 @@ def login_user(user: UserLogin):
 
     if user.password != saved_password:
         raise HTTPException(
-            status_code=401,
-            detail="Incorrect password"
+            status_code = 401,
+            detail = "Incorrect password"
         )
 
     token = create_token(
-        user_id=user_id,
-        username=username,
-        role=role
+        user_id = user_id,
+        username = username,
+        role = role
     )
 
     return {

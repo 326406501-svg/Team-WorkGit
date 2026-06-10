@@ -54,6 +54,7 @@ def get_article_image(article):
 # מסדר כתבה שחזרה מ-NYT למבנה אחיד שה-Frontend יבין
 def format_article(article, category):
     return {
+        "id": article.get("url"),
         "title": article.get("title"),
         "description": article.get("abstract"),
         "url": article.get("url"),

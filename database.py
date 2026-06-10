@@ -46,12 +46,20 @@ def create_tables():
     CREATE TABLE IF NOT EXISTS favorites (
         id SERIAL PRIMARY KEY,
         user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        article_id TEXT,
         title TEXT NOT NULL,
         url TEXT NOT NULL,
         image TEXT,
         source VARCHAR(100),
         category VARCHAR(50)
     );
+    """)
+
+    # אם טבלת favorites כבר הייתה קיימת לפני שהוספנו article_id,
+    # הפקודה הזאת מוסיפה את העמודה בלי למחוק מידע קיים
+    cursor.execute("""
+    ALTER TABLE favorites
+    ADD COLUMN IF NOT EXISTS article_id TEXT;
     """)
 
     # טבלת תגובות
