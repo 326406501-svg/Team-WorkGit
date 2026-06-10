@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live News Feed for {{username}}</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <script src="https://unpkg.com"></script>
+    <link rel="stylesheet" href="/staticGit/user_search.css">
+</head>
+<body>
+
+    <div class="welcome-header">
+        <div class="user-badge">
+            <i data-lucide="user"></i>
+            <span>Active Session: {{username}}</span>
+        </div>
+        <h1>Welcome Back, <span>{{username}}</span></h1>
+        <h2><i data-lucide="sparkles"></i> Here is the latest customized news for you</h2>
+    </div>
+
+    <div class="news-container">
+        {% for d in data %}
+        <div class="news-card">
+            
+            <!-- Removed the IF check condition wrapper entirely -->
+            <div class="card-image-wrapper">
+                <img src="{{d['image']}}" alt="News banner image" class="article-image" loading="lazy" onerror="this.style.display='none';">
+            </div>
+
+            <div class="card-header">
+                <span class="time-stamp">
+                    <i data-lucide="globe"></i> {{ d["source"] if d["source"] else "Web News" }}
+                </span>
+            </div>
+            
+            <h3>{{d["title"]}}</h3>
+            <p>{{d["description"] if d["description"] else "No further description details are available for this article."}}</p>
+            
+            <div class="card-footer">
+                <a href="{{d['url']}}" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+                    See Full Article <i data-lucide="external-link"></i>
+                </a>
+
+                <iframe name="hidden_save_frame_{{loop.index}}" style="display:none;"></iframe>
+                <form action="/data_save" method="post" class="auto-submit-form" target="hidden_save_frame_{{loop.index}}">
+                     <input type="hidden" name="username" value="{{username}}">
+                     <input type="hidden" name="title" value="{{d['title']}}">
+                     <input type="hidden" name="description" value="{{d['description']}}">
+                     <input type="hidden" name="url" value="{{d['url']}}">
+            
+                    <button type="submit" class="auto-submit-btn">
+                        <i data-lucide="bookmark"></i> Save This Post
+                    </button>
+                </form>
+            </div>
+        </div>
+        {% else %}
+        <div class="news-card empty-state">
+            <p><i data-lucide="search-code"></i> No results found. Try running a different search topic!</p>
+        </div>
+        {% endfor %}
+    </div>
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
+
+<!-- Euser_search.html -->

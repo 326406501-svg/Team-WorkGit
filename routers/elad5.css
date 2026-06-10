@@ -1,0 +1,176 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e293b);
+    color: #f8fafc;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    background: linear-gradient(to right, #38bdf8, #818cf8);
+    background-clip: text;         
+    -webkit-background-clip: text; 
+    -webkit-text-fill-color: transparent;
+    text-transform: capitalize;
+    letter-spacing: 1px;
+}
+
+.forms-container {
+    display: flex;
+    gap: 2rem;
+    width: 100%;
+    max-width: 900px;
+    justify-content: center;
+    flex-wrap: wrap; 
+}
+
+.form-div {
+    background: rgba(30, 41, 59, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    padding: 2.5rem;
+    border-radius: 16px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-div:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 30px rgba(56, 189, 248, 0.1);
+    border-color: rgba(56, 189, 248, 0.4);
+}
+
+.form-div::before {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    color: #94a3b8;
+    letter-spacing: 1.5px;
+    margin-bottom: -0.5rem;
+}
+.personal-form::before { content: "Personal Info"; }
+.search-form::before { content: "Search User"; }
+
+.form-div input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    background: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 1rem;
+    outline: none;
+    font-family: inherit;
+    transition: all 0.3s ease;
+}
+
+.form-div input:focus {
+    border-color: #38bdf8;
+    box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+}
+
+.form-div > button {
+    width: 100%;
+    padding: 0.85rem;
+    background: linear-gradient(135deg, #38bdf8, #2563eb);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: capitalize;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+}
+
+.form-div > button:hover {
+    background: linear-gradient(135deg, #0ea5e9, #1d4ed8);
+    box-shadow: 0 6px 16px rgba(37, 99, 235, 0.4);
+}
+
+.form-div > button:active {
+    transform: scale(0.98);
+}
+
+.subject-section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    margin-top: 1.5rem;   
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding-top: 1.5rem;  
+    width: 100%;
+}
+
+.subject-section h3 {
+    font-size: 0.9rem;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+    margin-bottom: 0.2rem;
+}
+
+.subject-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;         
+    width: 100%;
+}
+
+.subject-grid button {
+    width: 100%;
+    margin: 0;
+    padding: 0.65rem 0.8rem;
+    background: rgba(139, 92, 246, 0.05); 
+    border: 1px solid rgba(139, 92, 246, 0.25); 
+    color: #c084fc;       
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    text-transform: capitalize;
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.subject-grid button:hover {
+    background: rgba(139, 92, 246, 0.2);  
+    border-color: #a855f7;                
+    color: #ffffff;
+    box-shadow: 0 0 12px rgba(139, 92, 246, 0.25);
+}
+
+.subject-grid button:active {
+    transform: scale(0.96);
+}
+
+::placeholder {
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+/* open.css */

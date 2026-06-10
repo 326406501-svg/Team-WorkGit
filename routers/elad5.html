@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search History for {{username}}</title>
+    <link href="https://googleapis.com" rel="preconnect">
+    <script src="https://unpkg.com"></script>
+    <link rel="stylesheet" href="/staticGit/user_history.css">
+</head>
+<body>
+
+    <div class="welcome-header">
+        <div class="user-badge">
+            <i data-lucide="history"></i>
+            <span>Search Analytics</span>
+        </div>
+        <h1>Hello, <span>{{username}}</span></h1>
+        <h2><i data-lucide="calendar"></i> This is your history of searching:</h2>
+    </div>
+            
+    <div class="action-bar">
+        <a href="/" class="back-home-btn">
+            <i data-lucide="arrow-left"></i> Go Back to Home Page
+        </a>
+    </div>
+
+    <div class="history-container">
+        {% for topic, data in user_profile.items() %}
+        <div class="history-card">
+            <div class="history-card-header">
+                <h3><i data-lucide="search"></i> {{topic}}</h3>
+                <div class="stats-badge">
+                    <i data-lucide="clock"></i>
+                    <span>Total: {{data["total time of search"]}}</span>
+                </div>
+            </div>
+
+            <div class="timeline-section">
+                <h4><i data-lucide="list"></i> Dates of Search:</h4>
+                <div class="timeline-list">
+                    {% for date in data["date_of_search"] %}
+                    <div class="timeline-item">
+                        <span class="timeline-dot"></span>
+                        <span class="timeline-date">{{date}}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h2 class="section-title"><i data-lucide="bookmark"></i> Saved Posts</h2>
+
+    <div class="history-container">
+        {% if save_posts %}
+            {% for title, item in save_posts.items() %}
+            <div class="history-card bookmark-card">
+                <div class="history-card-header">
+                    <h3><i data-lucide="file-text"></i> {{ title }}</h3> 
+                </div>
+                <div class="timeline-section">
+                    <p class="bookmark-description">
+                        {{ item['description'] }}
+                    </p>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <a href="{{item['url']}}" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+                        Read Saved Article <i data-lucide="external-link"></i>
+                    </a>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <div class="history-card empty-state">
+                <p><i data-lucide="folder-open"></i> This user has no saved posts yet.</p>
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="danger-zone-wrapper">
+        <form action="/cleanhistory" method="POST" class="auto-submit-form">
+            <input type="hidden" name="username" value="{{username}}">
+            <input type="hidden" name="password" value="{{password}}">
+            <button type="submit" class="danger-action-btn">
+                <i data-lucide="trash-2"></i> Clean History & Saved Posts
+            </button>
+        </form>
+    </div>     
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+</html>
+
+<!-- user_history.html -->

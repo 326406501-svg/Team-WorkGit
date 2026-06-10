@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Your Account</title>
+    <link rel="stylesheet" href="/staticGit/register.css">
+</head>
+<body>
+
+    <div class="welcome-header">
+        <div class="user-badge">
+            🔒 Secure Registration
+        </div>
+        <h1>Create An <span>Account</span></h1>
+        <h2>✨ Sign up to save custom news insights</h2>
+    </div>
+
+    <div class="news-container" style="max-width: 480px;">
+        <div class="news-card">
+            
+            <form action="/register" method="POST" class="register-form">
+                
+                <div class="timeline-section">
+                    <h4>👤 Username:</h4>
+                    <input type="text" name="username" required placeholder="Choose a username">
+                </div>
+
+                <div class="timeline-section">
+                    <h4>✉️ Email Address:</h4>
+                    <input type="email" name="email" required placeholder="Enter your email">
+                </div>
+
+                <div class="timeline-section">
+                    <h4>🔑 Password (6-10 chars):</h4>
+                    <input type="password" name="password" required minlength="6" maxlength="10" placeholder="Create a password">
+                </div>
+
+                <div class="card-footer">
+                    <a href="/login" class="read-more-btn">
+                        Already registered? ➡️
+                    </a>
+                    <button type="submit">
+                        ➕ Register Now
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+</body>
+</html>
+
+
+<!-- reggister.html -->
