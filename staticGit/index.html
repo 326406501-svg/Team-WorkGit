@@ -21,11 +21,23 @@
 
         <form action="/search_user" method="post" class="form-div search-form">
             <input type="text" name="username" required placeholder="Enter username...">
-            <input type="text" name="category" placeholder="Enter category...">
-            <button type="submit">see information the topic you want</button>
+            
+            <div class="subject-section">
+                <h3>List of Subjects</h3>
+                <div class="subject-grid">
+                    <!-- Clicking any of these buttons submits the form automatically with name="category" -->
+                    <button type="submit" name="category" value="Israel">israel news</button>
+                    <button type="submit" name="category" value="Sports">sports</button>
+                    <button type="submit" name="category" value="Technology">technology</button>
+                    <button type="submit" name="category" value="Science">science</button>
+                    <button type="submit" name="category" value="Business">business</button>
+                    <button type="submit" name="category" value="Health">health</button>
+                    <button type="submit" name="category" value="Politics">politics</button>
+                    <button type="submit" name="category" value="Fashion">fashion</button>
+                </div>
+            </div>
         </form>
-
+        
     </div>
-
 </body>
 </html>

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Search History for {{username}}</title>
-    <link href="https://googleapis.com" rel="stylesheet">
+    <link href="https://googleapis.com" rel="preconnect">
     <script src="https://unpkg.com"></script>
     <link rel="stylesheet" href="/staticGit/user_history.css">
 </head>
@@ -55,15 +55,20 @@
 
     <div class="history-container">
         {% if save_posts %}
-            {% for title, description in save_posts.items() %}
+            {% for title, item in save_posts.items() %}
             <div class="history-card bookmark-card">
                 <div class="history-card-header">
                     <h3><i data-lucide="file-text"></i> {{ title }}</h3> 
                 </div>
                 <div class="timeline-section">
                     <p class="bookmark-description">
-                        {{ description }}
+                        {{ item['description'] }}
                     </p>
+                </div>
+                <div style="margin-top: 1rem;">
+                    <a href="{{item['url']}}" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+                        Read Saved Article <i data-lucide="external-link"></i>
+                    </a>
                 </div>
             </div>
             {% endfor %}
@@ -75,7 +80,7 @@
     </div>
 
     <div class="danger-zone-wrapper">
-        <form action="/cleanhistory" method="POST" class="auto-submit-form" target="danger-zone-wrapper">
+        <form action="/cleanhistory" method="POST" class="auto-submit-form">
             <input type="hidden" name="username" value="{{username}}">
             <input type="hidden" name="password" value="{{password}}">
             <button type="submit" class="danger-action-btn">

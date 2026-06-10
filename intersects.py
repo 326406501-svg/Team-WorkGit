@@ -74,6 +74,7 @@ def show_data_in_html (request:Request,username:str = Form(...),password:str = F
      save_posts=read_json_save__post_file()
      user_profile = data.get(username, {})
      user_posts = save_posts.get(username, {}) 
+  
      return templates.TemplateResponse(
           request=request, 
           name="user_history.html", 
@@ -81,15 +82,18 @@ def show_data_in_html (request:Request,username:str = Form(...),password:str = F
     else:
       return get_status("invalid username or password",request)
 @router.post("/data_save")
-def save_data_in_html (username:str = Form(...), title:str = Form(...),description:str= Form(...)):
+def save_data_in_html (username:str = Form(...), title:str = Form(...),description:str= Form(...),url:str=Form(...)):
      list_of_users=read_json_save__post_file()
      if username not in list_of_users:
        list_of_users[username]={
-         title:description
+         title:{"description":description,
+               "url":url}
+         
        }
      else:
            user_profile=list_of_users[username]
-           user_profile[title]=description
+           user_profile[title]={"description":description,"url":url}
+
      write_to_save_post_file(list_of_users)
 
 def get_status(status:str,request:Request):
