@@ -1,90 +1,119 @@
 # קובץ השירות של החדשות
-# אחראי על פנייה ל-NewsAPI והחזרת כתבות
+# אחראי על פנייה ל-New York Times API והחזרת כתבות
 
 import requests
+
 from fastapi import HTTPException
 
 
-# מפתח הגישה ל-NewsAPI
-API_KEY = "cc7d0ca7426449c294450595f874aec6"
+# מפתח הגישה ל-New York Times API
+API_KEY = "0ujXTZFKIPFM92nK0MaKblLrkrFL8bxRUIiG4FBgGkGE5Mpt"
 
 
-# רשימת הקטגוריות שהמערכת תומכת בהן
+# רשימת הקטגוריות שהמערכת תומכת בהן לפי NYT Top Stories API
 VALID_CATEGORIES = [
-    "sports",
-    "technology",
-    "science",
+    "arts",
+    "automobiles",
+    "books",
     "business",
-    "health"
+    "fashion",
+    "food",
+    "health",
+    "home",
+    "insider",
+    "magazine",
+    "movies",
+    "nyregion",
+    "obituaries",
+    "opinion",
+    "politics",
+    "realestate",
+    "science",
+    "sports",
+    "sundayreview",
+    "technology",
+    "theater",
+    "t-magazine",
+    "travel",
+    "upshot",
+    "us",
+    "world"
 ]
+
+
+# מוציא תמונה מתוך כתבה של NYT
+def get_article_image(article):
+    multimedia = article.get("multimedia")
+
+    if multimedia:
+        return multimedia[0].get("url")
+
+    return None
+
+
+# מסדר כתבה שחזרה מ-NYT למבנה אחיד שה-Frontend יבין
+def format_article(article, category):
+    return {
+        "title": article.get("title"),
+        "description": article.get("abstract"),
+        "url": article.get("url"),
+        "image": get_article_image(article),
+        "source": "New York Times",
+        "category": category
+    }
 
 
 # מביא כתבות לפי קטגוריה אחת
 def fetch_news_by_category(category):
-
-    # בדיקה שהקטגוריה חוקית
     if category not in VALID_CATEGORIES:
         raise HTTPException(
-            status_code=400,
-            detail="Invalid category"
+            status_code = 400,
+            detail = "Invalid category"
         )
 
-    # כתובת ה-API
-    url = "https://newsapi.org/v2/top-headlines"
+    url = f"https://api.nytimes.com/svc/topstories/v2/{category}.json"
 
-    # הפרמטרים שנשלחים ל-NewsAPI
     params = {
-        "apiKey": API_KEY,
-        "category": category,
-        "language": "en",
-        "pageSize": 10
+        "api-key": API_KEY
     }
 
     try:
-        # שליחת בקשה ל-NewsAPI
         response = requests.get(url, params=params)
 
-        # זריקת שגיאה במקרה של כישלון
         response.raise_for_status()
 
-        # המרת התשובה ל-JSON
         data = response.json()
 
-        # רשימת הכתבות שנחזיר למשתמש
         articles = []
 
-        # data מכיל את כל המידע שחזר מה-API
-        # כאן אנחנו עוברים על כל כתבה בנפרד כדי לקחת ממנה את המידע שאנחנו צריכים
-        for article in data.get("articles", []):
-            articles.append({
-                "title": article.get("title"),
-                "description": article.get("description"),
-                "url": article.get("url"),
-                "image": article.get("urlToImage"),
-                "source": article.get("source", {}).get("name"),
-                "category": category
-            })
+        results = data.get("results")
+
+        # אם NYT לא החזיר רשימת כתבות, נחזיר את השגיאה האמיתית כדי להבין מה קרה
+        if results is None:
+            return []
+
+        # כאן אנחנו עוברים על 10 הכתבות הראשונות ומסדרים אותן למבנה פשוט וברור
+        for article in results[:10]:
+            articles.append(
+                format_article(article, category)
+            )
 
         return articles
 
     except requests.exceptions.RequestException:
         raise HTTPException(
-            status_code=500,
-            detail="Failed to fetch news"
+            status_code = 500,
+            detail = "Failed to fetch news"
         )
 
 
 # מביא כתבות ממספר קטגוריות
 def fetch_news_by_multiple_categories(categories):
-
-    # רשימת כל הכתבות שנאסוף
     all_articles = []
 
-    # מעבר על כל הקטגוריות
     for category in categories:
         articles = fetch_news_by_category(category)
 
-        # הוספת הכתבות לרשימה אחת גדולה
         all_articles.extend(articles)
 
     return all_articles
