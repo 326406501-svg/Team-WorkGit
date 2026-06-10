@@ -3,28 +3,28 @@ from fastapi import HTTPException
 
 API_KEY = "cc7d0ca7426449c294450595f874aec6"
 
-VALID_CATEGORIES = [
-    "sports",
-    "technology",
-    "science",
-    "business",
-    "health"
-]
+# VALID_CATEGORIES = [
+#     "sports",
+#     "technology",
+#     "science",
+#     "business",
+#     "health"
+# ]
 
 
 def fetch_news_by_category(category):
-    if category not in VALID_CATEGORIES:
-        raise HTTPException(
-            status_code=400,
-            detail="Invalid category"
-        )
+    # if category not in VALID_CATEGORIES:
+    #     raise HTTPException(
+    #         status_code=400,
+    #         detail="Invalid category"
+    #     )
 
+    # url = "https://newsapi.org/v2/top-headlines"
     url = "https://newsapi.org/v2/top-headlines"
-
     params = {
         "apiKey": API_KEY,
-        "category": category,
-        "language": "en",
+        "category":category,
+        "language": "en", 
         "pageSize": 10
     }
 

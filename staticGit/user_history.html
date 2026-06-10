@@ -50,30 +50,40 @@
         </div>
         {% endfor %}
     </div>
-  <h2>Saved Posts</h2>
+
+    <h2 class="section-title"><i data-lucide="bookmark"></i> Saved Posts</h2>
 
     <div class="history-container">
         {% if save_posts %}
             {% for title, description in save_posts.items() %}
-            <div class="history-card" style="border-left: 4px solid #3b82f6;">
+            <div class="history-card bookmark-card">
                 <div class="history-card-header">
                     <h3><i data-lucide="file-text"></i> {{ title }}</h3> 
                 </div>
                 <div class="timeline-section">
-                    <p class="timeline-date" style="color: #4b5563; font-size: 1rem; line-height: 1.5;">
+                    <p class="bookmark-description">
                         {{ description }}
                     </p>
                 </div>
             </div>
             {% endfor %}
         {% else %}
-            <div class="history-card" style="text-align: center; color: #6b7280;">
+            <div class="history-card empty-state">
                 <p><i data-lucide="folder-open"></i> This user has no saved posts yet.</p>
             </div>
         {% endif %}
     </div>
 
-    <!-- Script tag now opens and closes correctly -->
+    <div class="danger-zone-wrapper">
+        <form action="/cleanhistory" method="POST" class="auto-submit-form" target="danger-zone-wrapper">
+            <input type="hidden" name="username" value="{{username}}">
+            <input type="hidden" name="password" value="{{password}}">
+            <button type="submit" class="danger-action-btn">
+                <i data-lucide="trash-2"></i> Clean History & Saved Posts
+            </button>
+        </form>
+    </div>     
+
     <script>
         lucide.createIcons();
     </script>

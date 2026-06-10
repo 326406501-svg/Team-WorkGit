@@ -5,12 +5,6 @@
         "email": "guycheck@gmail.com",
         "role": "admin"
     },
-    "elad": {
-        "id": 2,
-        "password": "guguuf45",
-        "email": "hjh@gmail.com",
-        "role": "admin"
-    },
     "aviv": {
         "id": 3,
         "password": "gjggy66",
@@ -23,16 +17,22 @@
         "email": "ghhgft@gmail.com",
         "role": "user"
     },
-    "Elad": {
-        "id": 5,
-        "password": "123456",
-        "email": "326406501@ziv-school.com",
-        "role": "user"
-    },
     "yoni": {
         "id": 6,
         "password": "1111111",
         "email": "32640653301@ziv-school.com",
+        "role": "user"
+    },
+    "Elad": {
+        "id": 7,
+        "password": "elad1234",
+        "email": "326406501@ziv-school.com",
+        "role": "user"
+    },
+    "sharon": {
+        "id": 8,
+        "password": "sharon1234",
+        "email": "3264065021@ziv-school.com",
         "role": "user"
     }
 }

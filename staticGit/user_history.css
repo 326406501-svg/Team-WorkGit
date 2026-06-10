@@ -398,3 +398,68 @@ h2.section-title {
     from { opacity: 0; transform: translateY(30px); }
     to { opacity: 1; transform: translateY(0); }
 }
+
+
+
+.danger-zone-wrapper {
+    width: 100%;
+    max-width: 720px;
+    display: flex;
+    justify-content: center;
+    margin-top: 2.5rem;
+    margin-bottom: 4rem;
+    animation: fadeInUp 0.6s ease-out both;
+}
+
+.danger-action-btn {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.2) 0%, rgba(220, 38, 38, 0.1) 100%);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: #fca5a5;
+    padding: 0.8rem 1.8rem;
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: 12px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 4px 15px rgba(239, 68, 68, 0.1);
+    font-family: inherit;
+}
+
+.danger-action-btn i {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.2s ease;
+}
+
+.danger-action-btn:hover {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.3) 0%, rgba(220, 38, 38, 0.2) 100%);
+    border-color: #ef4444;
+    color: #ffffff;
+    box-shadow: 0 0 25px rgba(239, 68, 68, 0.25);
+    transform: translateY(-2px);
+}
+
+.danger-action-btn:hover i {
+    transform: rotate(8deg) scale(1.1);
+}
+
+.danger-action-btn:active {
+    transform: scale(0.97);
+}
+
+.history-card.empty-state {
+    padding: 2.5rem;
+    border-style: dashed;
+    border-color: rgba(255, 255, 255, 0.1);
+    background: rgba(30, 41, 59, 0.2);
+}
+
+.history-card.empty-state i {
+    color: #64748b;
+    width: 20px;
+    height: 20px;
+}

@@ -1,4 +1,4 @@
-html<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -22,32 +22,41 @@ html<!DOCTYPE html>
     <div class="news-container">
         {% for d in data %}
         <div class="news-card">
+            
+            <!-- Removed the IF check condition wrapper entirely -->
+            <div class="card-image-wrapper">
+                <img src="{{d['image']}}" alt="News banner image" class="article-image" loading="lazy" onerror="this.style.display='none';">
+            </div>
+
             <div class="card-header">
-                <span class="topic-tag">
-                    <i data-lucide="hash"></i> Topic
-                </span>
                 <span class="time-stamp">
-                    <i data-lucide="clock"></i> Just now
+                    <i data-lucide="globe"></i> {{ d["source"] if d["source"] else "Web News" }}
                 </span>
             </div>
             
             <h3>{{d["title"]}}</h3>
-            <p>{{d["description"]}}</p>
+            <p>{{d["description"] if d["description"] else "No further description details are available for this article."}}</p>
             
             <div class="card-footer">
-                <a href="#" class="read-more-btn">
-                    Go up <i data-lucide="arrow-right"></i>
+                <a href="{{d['url']}}" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+                    See Full Article <i data-lucide="external-link"></i>
                 </a>
 
-                <iframe name="hidden_save_frame" style="display:none;"></iframe>
-                <form action="/data_save" method="post" class="form-div personal-form" target="hidden_save_frame">
+                <iframe name="hidden_save_frame_{{loop.index}}" style="display:none;"></iframe>
+                <form action="/data_save" method="post" class="auto-submit-form" target="hidden_save_frame_{{loop.index}}">
                      <input type="hidden" name="username" value="{{username}}">
                      <input type="hidden" name="title" value="{{d['title']}}">
                      <input type="hidden" name="description" value="{{d['description']}}">
             
-                    <button type="submit"><i data-lucide="bookmark"></i> save this post</button>
+                    <button type="submit" class="auto-submit-btn">
+                        <i data-lucide="bookmark"></i> Save This Post
+                    </button>
                 </form>
             </div>
+        </div>
+        {% else %}
+        <div class="news-card empty-state">
+            <p><i data-lucide="search-code"></i> No results found. Try running a different search topic!</p>
         </div>
         {% endfor %}
     </div>

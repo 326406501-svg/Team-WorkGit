@@ -90,7 +90,39 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     animation: fadeInUp 0.6s ease-out both;
+    overflow: hidden; 
 }
+
+
+
+.card-image-wrapper {
+    width: calc(100% + 4rem); 
+    margin-top: -2rem;      
+    margin-left: -2rem;     
+    margin-bottom: 1.5rem;
+    max-height: 280px;
+    overflow: hidden;
+    background: rgba(15, 23, 42, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.article-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;       
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.news-card:hover .article-image {
+    transform: scale(1.03); 
+}
+
+.article-image[style*="display: none;"] {
+    margin-bottom: 0 !important;
+}
+
+
 
 .card-header {
     display: flex;
@@ -99,31 +131,18 @@ body {
     margin-bottom: 1.2rem;
 }
 
-.topic-tag {
-    display: flex;
-    align-items: center;
-    gap: 0.3rem;
-    font-size: 0.75rem;
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    color: #38bdf8;
-    background: rgba(56, 189, 248, 0.1);
-    padding: 0.3rem 0.7rem;
-    border-radius: 6px;
-}
-
-.topic-tag i, .time-stamp i {
-    width: 12px;
-    height: 12px;
-}
-
 .time-stamp {
     display: flex;
     align-items: center;
     gap: 0.3rem;
     font-size: 0.8rem;
     color: #64748b;
+}
+
+.time-stamp i, .time-stamp svg {
+    width: 14px;
+    height: 14px;
+    color: #38bdf8;
 }
 
 .news-card h3 {
@@ -156,13 +175,13 @@ body {
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 600;
-    display: flex;
+    display: inline-flex;
     align-items: center;
     gap: 0.4rem;
     transition: color 0.2s ease;
 }
 
-.read-more-btn i {
+.read-more-btn i, .read-more-btn svg {
     width: 16px;
     height: 16px;
     transition: transform 0.2s ease;
@@ -179,18 +198,18 @@ body {
     color: #38bdf8;
 }
 
-.news-card:hover .read-more-btn i {
+.news-card:hover .read-more-btn i,
+.news-card:hover .read-more-btn svg {
     transform: translateX(4px);
 }
 
-.form-div.personal-form {
+.auto-submit-form, .form-div.personal-form {
     display: inline-flex;
     margin: 0;
     padding: 0;
 }
 
-/* Explicit button targeting to force styling overrides */
-.form-div.personal-form button {
+.auto-submit-btn, .form-div.personal-form button {
     background: none !important;
     border: none !important;
     outline: none !important;
@@ -203,29 +222,34 @@ body {
     gap: 0.4rem;
     cursor: pointer;
     font-family: inherit;
-    text-transform: capitalize;
     transition: color 0.2s ease, transform 0.2s ease;
 }
 
-/* FIX: Targets both the tag and the generated SVG icon from Lucide */
-.form-div.personal-form button i,
-.form-div.personal-form button svg {
+.auto-submit-btn i, .auto-submit-btn svg,
+.form-div.personal-form button i, .form-div.personal-form button svg {
     width: 16px !important;
     height: 16px !important;
     transition: transform 0.2s ease;
 }
 
-.form-div.personal-form button:hover {
+.auto-submit-btn:hover, .form-div.personal-form button:hover {
     color: #34d399;
 }
 
-.form-div.personal-form button:hover i,
-.form-div.personal-form button:hover svg {
+.auto-submit-btn:hover i, .auto-submit-btn:hover svg,
+.form-div.personal-form button:hover i, .form-div.personal-form button:hover svg {
     transform: translateY(-2px);
 }
 
-.form-div.personal-form button:active {
+.auto-submit-btn:active, .form-div.personal-form button:active {
     transform: scale(0.95);
+}
+
+.empty-state {
+    text-align: center;
+    color: #64748b;
+    padding: 3rem 1.5rem;
+    border: 1px dashed rgba(255, 255, 255, 0.1);
 }
 
 @keyframes fadeInDown {

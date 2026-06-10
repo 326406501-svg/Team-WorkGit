@@ -64,10 +64,10 @@ def user_interests(username,interest_category):
                               "total time of search":1 }
       list_of_users[username]=user_profile
       write_to_json_file(list_of_users)
-user_interests("tomer","sport")
+# user_interests("tomer","sport")
 
 @router.post("/data",response_class=HTMLResponse)
-def show_data_in_html (request:Request,username:str = Form(...),password:int = Form(...)):
+def show_data_in_html (request:Request,username:str = Form(...),password:str = Form(...)):
     list_of_users=get_uesers_password_and_username()
     if username in list_of_users and list_of_users[username]["password"]==password:
      data=read_json_intersets_file()
@@ -77,7 +77,7 @@ def show_data_in_html (request:Request,username:str = Form(...),password:int = F
      return templates.TemplateResponse(
           request=request, 
           name="user_history.html", 
-          context={"username":username,"user_profile": user_profile,"save_posts": user_posts})
+          context={"username":username,"user_profile": user_profile,"save_posts": user_posts,"password":password})
     else:
       return get_status("invalid username or password",request)
 @router.post("/data_save")
@@ -100,5 +100,16 @@ def get_status(status:str,request:Request):
 
 @router.get("/login", response_class=HTMLResponse)
 def show_login_page(request: Request):
-    # 2. הכתובת /login תציג את הדף הישן שלך
+  
     return templates.TemplateResponse(request=request, name="index.html")
+@router.post("/cleanhistory")
+def clean_history(request: Request,username:str = Form(...),password:str= Form(...)):
+  #clean serch history of user
+  list_of_searching=read_json_intersets_file()
+  list_of_searching.pop(username,None)
+  write_to_json_file(list_of_searching)
+  #clean saving posts of users
+  list_of_saving_posts=read_json_save__post_file()
+  list_of_saving_posts.pop(username,None)
+  write_to_save_post_file(list_of_saving_posts)
+  return  show_data_in_html(request,username,password)
