@@ -61,7 +61,16 @@
         </div>
         {% endfor %}
     </div>
-
+    <div>
+         <form action="/search_user_more" method="post" class="auto-submit-form" >
+                     <input type="hidden" name="username" value="{{username}}">
+                     <input type="hidden" name="category" value="{{data[0]['category']}}">
+                     <input type="hidden" name="amount" value="{{data|length }}">
+                    <button type="submit" class="auto-submit-btn">
+                        <i data-lucide="bookmark"></i>See more posts
+                    </button>
+        </form>
+    </div>
     <script>
         lucide.createIcons();
     </script>

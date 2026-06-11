@@ -17,6 +17,7 @@ import datetime
 SECRET_KEY = "my_super_secret_key"
 from intersects import get_status
 from intersects import user_interests
+from message import send_customer_emails_from_json
 
 def load_users(): 
     with open ("users.json","r",encoding="utf-8") as file:
@@ -62,7 +63,7 @@ def register_user(
         user_id = get_next_id(users)
         users[username] = {"id": user_id, "password": password, "email": email, "role": "user"}
         save_users(users)
-        
+        send_customer_emails_from_json(username)
         return templates.TemplateResponse(request=request, name="index.html")   
 
 

@@ -13,12 +13,12 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 3rem 1.5rem;
+    padding: 1.5rem 1rem;
 }
 
 .welcome-header {
     text-align: center;
-    margin-bottom: 3.5rem;
+    margin-bottom: 1.5rem;
     animation: fadeInDown 0.6s ease-out;
 }
 
@@ -28,20 +28,20 @@ body {
     gap: 0.5rem;
     background: rgba(99, 102, 241, 0.15);
     border: 1px solid rgba(99, 102, 241, 0.3);
-    padding: 0.4rem 1rem;
+    padding: 0.3rem 0.8rem;
     border-radius: 20px;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #a5b4fc;
     font-weight: 500;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.5rem;
 }
 
 .welcome-header h1 {
-    font-size: 2.8rem;
+    font-size: 2.2rem;
     font-weight: 800;
     color: #ffffff;
     letter-spacing: -0.5px;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.2rem;
 }
 
 .welcome-header h1 span {
@@ -53,7 +53,7 @@ body {
 }
 
 .welcome-header h2 {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
     color: #94a3b8;
     font-weight: 400;
     display: flex;
@@ -62,40 +62,127 @@ body {
     gap: 0.5rem;
 }
 
-.news-container {
-    width: 100%;
-    max-width: 720px;
+.main-layout {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.register-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+.register-container .news-card {
+    width: 100%;
+    max-width: 360px;
+    padding: 1.25rem;
+}
+
+.register-container .timeline-section {
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+}
+
+.register-container .card-footer {
+    padding-top: 1rem;
+}
+
+.news-container {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+    justify-content: center;
+}
+
+.news-container .news-card {
+    flex: 1 1 calc(33.333% - 1rem);
+    min-width: 260px;
+    max-width: 340px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.25rem;
 }
 
 .news-card {
     background: rgba(30, 41, 59, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.06);
     backdrop-filter: blur(12px);
-    padding: 2rem;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1), 
+                background-color 0.3s ease, 
+                border-color 0.3s ease, 
+                box-shadow 0.3s ease;
     animation: fadeInUp 0.6s ease-out both;
+}
+
+.news-container .news-card:hover {
+    transform: translateY(-6px);
+    background: rgba(30, 41, 59, 0.6);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 12px 30px rgba(99, 102, 241, 0.15);
+}
+
+.card-image-wrapper {
+    width: 100%;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 0.75rem;
+}
+
+.article-image {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+}
+
+.card-header {
+    margin-bottom: 0.5rem;
+}
+
+.time-stamp {
+    font-size: 0.75rem;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.news-container h3 {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+    font-weight: 700;
+    line-height: 1.4;
+}
+
+.news-container p {
+    font-size: 0.85rem;
+    color: #94a3b8;
+    line-height: 1.4;
+    margin-bottom: 1rem;
 }
 
 .timeline-section {
     background: rgba(15, 23, 42, 0.4);
-    border-radius: 12px;
-    padding: 1.2rem;
+    border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.03);
-    margin-bottom: 1.2rem;
 }
 
 .timeline-section h4 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: #94a3b8;
     font-weight: 600;
 }
 
-/* Styled Form Inputs */
 .register-form {
     display: flex;
     flex-direction: column;
@@ -104,13 +191,13 @@ body {
 
 .register-form input {
     width: 100%;
-    padding: 0.8rem;
-    border-radius: 8px;
-    margin-top: 0.5rem;
+    padding: 0.65rem;
+    border-radius: 6px;
+    margin-top: 0.4rem;
     background: #0f172a;
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #ffffff;
-    font-size: 1rem;
+    font-size: 0.9rem;
     outline: none;
     transition: border-color 0.2s ease;
 }
@@ -119,35 +206,37 @@ body {
     border-color: #818cf8;
 }
 
-/* Card Actions Alignment */
 .card-footer {
     border-top: 1px solid rgba(255, 255, 255, 0.05);
-    padding-top: 1.5rem;
+    padding-top: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    margin-top: auto;
 }
 
 .read-more-btn {
     color: #818cf8;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 600;
     transition: color 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
 }
 
 .read-more-btn:hover {
     color: #38bdf8;
 }
 
-/* Submit Button Override styling */
 .register-form button[type="submit"] {
     background: transparent;
     border: none;
     outline: none;
     color: #34d399;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 700;
     cursor: pointer;
     font-family: inherit;
@@ -163,12 +252,32 @@ body {
     transform: scale(0.95);
 }
 
+.empty-state {
+    width: 100%;
+    max-width: 480px;
+    text-align: center;
+}
+
+@media (max-width: 1024px) {
+    .news-container .news-card {
+        flex: 1 1 calc(50% - 0.75rem);
+        max-width: 400px;
+    }
+}
+
+@media (max-width: 768px) {
+    .news-container .news-card {
+        flex: 1 1 100%;
+        max-width: 360px;
+    }
+}
+
 @keyframes fadeInDown {
-    from { opacity: 0; transform: translateY(-20px); }
+    from { opacity: 0; transform: translateY(-15px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(30px); }
+    from { opacity: 0; transform: translateY(20px); }
     to { opacity: 1; transform: translateY(0); }
 }

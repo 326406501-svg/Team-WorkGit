@@ -21,7 +21,8 @@ def get_article_image(article):
     return None
 
 
-def fetch_news_by_category(category):
+def fetch_news_by_category(category,x=10):
+    
     category_clean = category.lower().strip() if category else "world"
 
     if category_clean not in VALID_CATEGORIES:
@@ -60,17 +61,8 @@ def fetch_news_by_category(category):
                 "category": category_clean
             })
 
-        return articles[:10]
+        return articles[:x]
 
     except requests.exceptions.RequestException:
         return []
 
-
-def fetch_news_by_multiple_categories(categories):
-    all_articles = []
-
-    for category in categories:
-        articles = fetch_news_by_category(category)
-        all_articles.extend(articles)
-
-    return all_articles

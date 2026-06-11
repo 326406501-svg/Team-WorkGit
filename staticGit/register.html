@@ -16,37 +16,58 @@
         <h2>✨ Sign up to save custom news insights</h2>
     </div>
 
-    <div class="news-container" style="max-width: 480px;">
-        <div class="news-card">
-            
-            <form action="/register" method="POST" class="register-form">
-                
-                <div class="timeline-section">
-                    <h4>👤 Username:</h4>
-                    <input type="text" name="username" required placeholder="Choose a username">
-                </div>
+    <div class="main-layout">
+        <div class="register-container">
+            <div class="news-card">
+                <form action="/register" method="POST" class="register-form">
+                    <div class="timeline-section">
+                        <h4>👤 Username:</h4>
+                        <input type="text" name="username" required placeholder="Choose a username">
+                    </div>
+                    <div class="timeline-section">
+                        <h4>✉️ Email Address:</h4>
+                        <input type="email" name="email" required placeholder="Enter your email">
+                    </div>
+                    <div class="timeline-section">
+                        <h4>🔑 Password (6-10 chars):</h4>
+                        <input type="password" name="password" required minlength="6" maxlength="10" placeholder="Create a password">
+                    </div>
+                    <div class="card-footer">
+                        <a href="/login" class="read-more-btn">
+                            Already registered? ➡️
+                        </a>
+                        <button type="submit">
+                            ➕ Register Now
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
 
-                <div class="timeline-section">
-                    <h4>✉️ Email Address:</h4>
-                    <input type="email" name="email" required placeholder="Enter your email">
+        <div class="news-container">
+            {% for d in data %}
+            <div class="news-card">
+                <div class="card-image-wrapper">
+                    <img src="{{d['image']}}" alt="News banner image" class="article-image" loading="lazy" onerror="this.style.display='none';">
                 </div>
-
-                <div class="timeline-section">
-                    <h4>🔑 Password (6-10 chars):</h4>
-                    <input type="password" name="password" required minlength="6" maxlength="10" placeholder="Create a password">
+                <div class="card-header">
+                    <span class="time-stamp">
+                        <i data-lucide="globe"></i> {{ d["source"] if d["source"] else "Web News" }}
+                    </span>
                 </div>
-
+                <h3>{{d["title"]}}</h3>
+                <p>{{d["description"] if d["description"] else "No further description details are available for this article."}}</p>
                 <div class="card-footer">
-                    <a href="/login" class="read-more-btn">
-                        Already registered? ➡️
+                    <a href="{{d['url']}}" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+                        See Full Article <i data-lucide="external-link"></i>
                     </a>
-                    <button type="submit">
-                        ➕ Register Now
-                    </button>
                 </div>
-
-            </form>
-
+            </div>
+            {% else %}
+            <div class="news-card empty-state">
+                <p><i data-lucide="search-code"></i> No results found. Try running a different search topic!</p>
+            </div>
+            {% endfor %}
         </div>
     </div>
 

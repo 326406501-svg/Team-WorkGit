@@ -4,35 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notice / Alert</title>
-    <!-- קישור לקובץ העיצוב הגלובלי שלך כדי לקבל את הרקע והגופנים -->
+    <script src="https://unpkg.com"></script>
+    <link href="https://googleapis.com" rel="stylesheet">
     <link rel="stylesheet" href="/staticGit/status.css">
+    
+
 </head>
 <body>
 
-    <div class="welcome-header" style="margin-top: 4rem;">
-        <div class="user-badge" style="background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); color: #f87171;">
-            ⚠️ System Notification
+    <div class="alert-wrapper">
+        
+        <div class="welcome-header">
+            <div class="user-badge">
+                <i data-lucide="alert-triangle" style="width: 16px; height: 16px;"></i>
+                System Notification
+            </div>
+            <h1>Action <span>Required</span></h1>
         </div>
-        <h1>Action <span>Required</span></h1>
-    </div>
 
-    <div class="news-container" style="max-width: 520px;">
-        <div class="news-card" style="text-align: center; border-color: rgba(239, 68, 68, 0.2);">
-            
-            <!-- הצגת הודעת השגיאה שמתקבלת מה-Python -->
-            <p style="font-size: 1.2rem; line-height: 1.6; color: #cbd5e1; margin-bottom: 2rem; font-weight: 500;">
-                {{ status_code }}
+        <div class="news-card">
+            <p class="status-message">
+                {{ status_code if status_code else "An unhandled execution state has interrupted your session." }}
             </p>
             
-            <!-- כפתור חזרה מעוצב ללא גבולות שתואם לחלוטין לקוד ה-CSS שלך -->
-            <div class="card-footer" style="justify-content: center; border-top: 1px solid rgba(255, 255, 255, 0.05); padding-top: 1.5rem;">
-                <a href="/" class="read-more-btn" style="font-size: 1rem; color: #818cf8; text-decoration: none; font-weight: 700; display: inline-flex; align-items: center; gap: 0.5rem;">
-                    ↩️ Go Back to Home Page
+            <div class="card-footer">
+                <a href="/" class="read-more-btn">
+                    <i data-lucide="arrow-left" style="width: 18px; height: 18px;"></i>
+                    Return to Dashboard
                 </a>
             </div>
-
         </div>
+
     </div>
 
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>

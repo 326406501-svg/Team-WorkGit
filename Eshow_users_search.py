@@ -27,3 +27,16 @@ def show_user_search(request:Request,username:str = Form(...),category:str = For
   else:
       return get_status("invalid username",request)
 
+@router.post("/search_user_more",response_class=HTMLResponse)
+def show_user_search(request:Request,username:str = Form(...),category:str = Form(...),amount:int=Form(...)):
+  #save the user 
+  list_of_users=get_uesers_password_and_username()
+  if username in list_of_users :
+    user_interests(username,category)
+    data=fetch_news_by_category(category,amount+10)
+    return templates.TemplateResponse(
+          request=request, 
+          name="Euser_search.html", 
+          context={"username":username,"data":data})
+  else:
+      return get_status("invalid username",request)
