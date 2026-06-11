@@ -1,10 +1,4 @@
 {
-    "guy": {
-        "id": 1,
-        "password": "guygo77",
-        "email": "guycheck@gmail.com",
-        "role": "admin"
-    },
     "aviv": {
         "id": 3,
         "password": "gjggy66",
@@ -33,6 +27,12 @@
         "id": 9,
         "password": "elad1234",
         "email": "326406501@ziv-school.com",
+        "role": "user"
+    },
+    "guy": {
+        "id": 10,
+        "password": "guy123",
+        "email": "0525909909ab@gmail.com",
         "role": "user"
     }
 }

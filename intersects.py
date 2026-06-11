@@ -74,11 +74,12 @@ def show_data_in_html (request:Request,username:str = Form(...),password:str = F
      save_posts=read_json_save__post_file()
      user_profile = data.get(username, {})
      user_posts = save_posts.get(username, {}) 
+     favorite_posts=show_users_favorite_posts(username)
   
      return templates.TemplateResponse(
           request=request, 
           name="user_history.html", 
-          context={"username":username,"user_profile": user_profile,"save_posts": user_posts,"password":password})
+          context={"username":username,"user_profile": user_profile,"save_posts": user_posts,"password":password,"favorite_posts": favorite_posts})
     else:
       return get_status("invalid username or password",request)
 @router.post("/data_save")
@@ -117,3 +118,7 @@ def clean_history(request: Request,username:str = Form(...),password:str= Form(.
   list_of_saving_posts.pop(username,None)
   write_to_save_post_file(list_of_saving_posts)
   return  show_data_in_html(request,username,password)
+def show_users_favorite_posts(name):
+ data=read_json_intersets_file()[name]
+ most_frequent_topic = max(data.keys(), key=lambda topic: data[topic]["total time of search"])
+ return fetch_news_by_category(most_frequent_topic,3)
