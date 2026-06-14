@@ -17,10 +17,9 @@ from message import send_news_update_email
 
 router = APIRouter()
 
-templates = Jinja2Templates(directory="html")
+templates = Jinja2Templates(directory = "html")
 
 
-# בודק אם המשתמש הוא admin לפי username + password
 def check_admin(username, password):
     connection = get_database_connection()
     cursor = connection.cursor()
@@ -31,10 +30,7 @@ def check_admin(username, password):
         WHERE username = %s
         AND password = %s
         AND role = 'admin';
-    """, (
-        username,
-        password
-    ))
+    """, (username, password))
 
     admin_user = cursor.fetchone()
 
@@ -44,7 +40,6 @@ def check_admin(username, password):
     return admin_user
 
 
-# שליפת כל המשתמשים
 def get_all_users_from_db():
     connection = get_database_connection()
     cursor = connection.cursor()
@@ -73,7 +68,6 @@ def get_all_users_from_db():
     return users
 
 
-# שליפת כל התגובות
 def get_all_comments_from_db():
     connection = get_database_connection()
     cursor = connection.cursor()
@@ -109,16 +103,14 @@ def get_all_comments_from_db():
     return comments
 
 
-# דף התחברות לאדמין
 @router.get("/admin", response_class=HTMLResponse)
 def admin_login_page(request: Request):
     return templates.TemplateResponse(
-        request=request,
-        name="admin_login.html"
+        request = request,
+        name = "admin_login.html"
     )
 
 
-# פתיחת דשבורד אדמין
 @router.post("/admin/dashboard", response_class=HTMLResponse)
 def admin_dashboard(
     request: Request,
@@ -129,9 +121,9 @@ def admin_dashboard(
 
     if admin_user is None:
         return templates.TemplateResponse(
-            request=request,
-            name="status.html",
-            context={
+            request = request,
+            name = "status.html",
+            context = {
                 "status_code": "Access denied. Admin only."
             }
         )
@@ -140,9 +132,9 @@ def admin_dashboard(
     comments = get_all_comments_from_db()
 
     return templates.TemplateResponse(
-        request=request,
-        name="admin_dashboard.html",
-        context={
+        request = request,
+        name = "admin_dashboard.html",
+        context = {
             "admin_username": username,
             "admin_password": password,
             "users": users,
@@ -151,7 +143,6 @@ def admin_dashboard(
     )
 
 
-# מחיקת משתמש
 @router.post("/admin/delete_user", response_class=HTMLResponse)
 def delete_user_from_admin(
     request: Request,
@@ -163,15 +154,71 @@ def delete_user_from_admin(
 
     if admin_user is None:
         return templates.TemplateResponse(
-            request=request,
-            name="status.html",
-            context={
+            request = request,
+            name = "status.html",
+            context = {
                 "status_code": "Access denied. Admin only."
             }
         )
 
     connection = get_database_connection()
     cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT role
+        FROM users
+        WHERE id = %s;
+    """, (user_id,))
+
+    user_to_delete = cursor.fetchone()
+
+    if user_to_delete is None:
+        cursor.close()
+        connection.close()
+
+        return templates.TemplateResponse(
+            request = request,
+            name = "admin_dashboard.html",
+            context = {
+                "admin_username": admin_username,
+                "admin_password": admin_password,
+                "users": get_all_users_from_db(),
+                "comments": get_all_comments_from_db(),
+                "message": "User not found."
+            }
+        )
+
+    if user_id == admin_user[0]:
+        cursor.close()
+        connection.close()
+
+        return templates.TemplateResponse(
+            request = request,
+            name = "admin_dashboard.html",
+            context = {
+                "admin_username": admin_username,
+                "admin_password": admin_password,
+                "users": get_all_users_from_db(),
+                "comments": get_all_comments_from_db(),
+                "message": "You cannot delete your own admin account."
+            }
+        )
+
+    if user_to_delete[0] == "admin":
+        cursor.close()
+        connection.close()
+
+        return templates.TemplateResponse(
+            request = request,
+            name = "admin_dashboard.html",
+            context = {
+                "admin_username": admin_username,
+                "admin_password": admin_password,
+                "users": get_all_users_from_db(),
+                "comments": get_all_comments_from_db(),
+                "message": "Admin users cannot be deleted."
+            }
+        )
 
     cursor.execute("""
         DELETE FROM users
@@ -183,22 +230,19 @@ def delete_user_from_admin(
     cursor.close()
     connection.close()
 
-    users = get_all_users_from_db()
-    comments = get_all_comments_from_db()
-
     return templates.TemplateResponse(
-        request=request,
-        name="admin_dashboard.html",
-        context={
+        request = request,
+        name = "admin_dashboard.html",
+        context = {
             "admin_username": admin_username,
             "admin_password": admin_password,
-            "users": users,
-            "comments": comments
+            "users": get_all_users_from_db(),
+            "comments": get_all_comments_from_db(),
+            "message": "User deleted successfully."
         }
     )
 
 
-# מחיקת תגובה
 @router.post("/admin/delete_comment", response_class=HTMLResponse)
 def delete_comment_from_admin(
     request: Request,
@@ -210,9 +254,9 @@ def delete_comment_from_admin(
 
     if admin_user is None:
         return templates.TemplateResponse(
-            request=request,
-            name="status.html",
-            context={
+            request = request,
+            name = "status.html",
+            context = {
                 "status_code": "Access denied. Admin only."
             }
         )
@@ -230,22 +274,19 @@ def delete_comment_from_admin(
     cursor.close()
     connection.close()
 
-    users = get_all_users_from_db()
-    comments = get_all_comments_from_db()
-
     return templates.TemplateResponse(
-        request=request,
-        name="admin_dashboard.html",
-        context={
+        request = request,
+        name = "admin_dashboard.html",
+        context = {
             "admin_username": admin_username,
             "admin_password": admin_password,
-            "users": users,
-            "comments": comments
+            "users": get_all_users_from_db(),
+            "comments": get_all_comments_from_db(),
+            "message": "Comment deleted successfully."
         }
     )
 
 
-# שליחת עדכון חדשות לכל המשתמשים
 @router.post("/admin/send_news_update", response_class=HTMLResponse)
 def send_news_update_from_admin(
     request: Request,
@@ -256,9 +297,9 @@ def send_news_update_from_admin(
 
     if admin_user is None:
         return templates.TemplateResponse(
-            request=request,
-            name="status.html",
-            context={
+            request = request,
+            name = "status.html",
+            context = {
                 "status_code": "Access denied. Admin only."
             }
         )
@@ -273,16 +314,14 @@ def send_news_update_from_admin(
             articles
         )
 
-    comments = get_all_comments_from_db()
-
     return templates.TemplateResponse(
-        request=request,
-        name="admin_dashboard.html",
-        context={
+        request = request,
+        name = "admin_dashboard.html",
+        context = {
             "admin_username": admin_username,
             "admin_password": admin_password,
             "users": users,
-            "comments": comments,
+            "comments": get_all_comments_from_db(),
             "message": "News update email preview was sent to all users in the terminal."
         }
     )

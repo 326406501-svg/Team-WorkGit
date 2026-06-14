@@ -96,7 +96,7 @@
 
     {% if data %}
     <div>
-        <form action="/search_user_more" method="post" class="auto-submit-form">
+        <form action="/search_user_more" method="post" class="auto-submit-form see-more-form">
             <input type="hidden" name="username" value="{{username}}">
             <input type="hidden" name="category" value="{{data[0]['category']}}">
             <input type="hidden" name="amount" value="{{data|length}}">
@@ -110,5 +110,8 @@
     <script>
         lucide.createIcons();
     </script>
+
+    <script src="/js/main.js"></script>
+
 </body>
 </html>

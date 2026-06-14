@@ -18,9 +18,14 @@ app = FastAPI()
 app.mount(
     "/css",
     StaticFiles(directory = "css"),
-    name="css"
+    name = "css"
 )
 
+app.mount(
+    "/js",
+    StaticFiles(directory = "js"),
+    name = "js"
+)
 
 # HTML
 templates = Jinja2Templates(directory = "html")
