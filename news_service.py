@@ -7,7 +7,7 @@ from fastapi import HTTPException
 
 
 # מפתח הגישה ל-New York Times API
-API_KEY = "cc7d0ca7426449c294450595f874aec6"
+API_KEY = "0ujXTZFKIPFM92nK0MaKblLrkrFL8bxRUIiG4FBgGkGE5Mpt"
 
 
 # רשימת הקטגוריות שהמערכת תומכת בהן לפי NYT Top Stories API
@@ -65,7 +65,6 @@ def format_article(article, category):
 
 
 # מביא כתבות לפי קטגוריה אחת
-# amount קובע כמה כתבות להחזיר
 def fetch_news_by_category(category, amount=10):
     if category not in VALID_CATEGORIES:
         raise HTTPException(
@@ -90,11 +89,11 @@ def fetch_news_by_category(category, amount=10):
 
         results = data.get("results")
 
-        # אם אין כתבות בקטגוריה מסוימת, מחזירים רשימה ריקה ולא מפילים את השרת
+        # אם NYT לא החזיר רשימת כתבות, נחזיר את השגיאה האמיתית כדי להבין מה קרה
         if results is None:
             return []
 
-        # לוקחים רק את כמות הכתבות שביקשנו
+        # כאן אנחנו עוברים על 10 הכתבות הראשונות ומסדרים אותן למבנה פשוט וברור
         for article in results[:amount]:
             articles.append(
                 format_article(article, category)
@@ -113,7 +112,6 @@ def fetch_news_by_category(category, amount=10):
 def fetch_news_by_multiple_categories(categories):
     all_articles = []
 
-    # עוברים על כל קטגוריה ומוסיפים את הכתבות שלה לרשימה אחת
     for category in categories:
         articles = fetch_news_by_category(category)
 

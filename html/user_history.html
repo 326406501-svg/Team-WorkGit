@@ -6,7 +6,7 @@
     <title>Search History for {{username}}</title>
     <link href="https://googleapis.com" rel="preconnect">
     <script src="https://unpkg.com"></script>
-    <link rel="stylesheet" href="/staticGit/user_history.css">
+    <link rel="stylesheet" href="/css/user_history.css">
 </head>
 <body>
 
@@ -27,7 +27,7 @@
 
     <div class="history-container">
         {% for topic, data in user_profile.items() %}
-        <div class="history-card">
+        <div class="history-card" style="max-width: 300px !important; width: 100% !important;">
             <div class="history-card-header">
                 <h3><i data-lucide="search"></i> {{topic}}</h3>
                 <div class="stats-badge">
@@ -51,21 +51,51 @@
         {% endfor %}
     </div>
 
+    <h2 class="section-title"><i data-lucide="trending-up"></i> Your most popular search query</h2>
+
+    <div class="news-container" style="display: flex !important; flex-wrap: wrap !important; gap: 2rem !important; justify-content: center !important;">
+        {% for d in favorite_posts %}
+        <div class="news-card" style="max-width: 300px !important; width: 100% !important;">
+            
+            <div class="card-image-wrapper" style="width: 100% !important; height: 200px !important; overflow: hidden !important;">
+                <img src="{{d['image']}}" alt="News banner image" class="article-image" loading="lazy" style="width: 100% !important; height: 100% !important; object-fit: cover !important;" onerror="this.parentElement.style.display='none';">
+            </div>
+
+            <div class="news-content-wrapper" style="padding: 1.25rem !important;">
+                <h3>{{d["title"]}}</h3>
+                <p>{{d["description"] if d["description"] else "No further description details are available for this article."}}</p>
+                
+                <div class="card-footer">
+                    <a href="{{d['url']}}" target="_blank" rel="noopener noreferrer" class="read-more-btn">
+                        See Full Article <i data-lucide="external-link"></i>
+                    </a>
+                </div> 
+            </div>
+        </div> 
+        {% else %}
+        <div class="news-card empty-state">
+            <p><i data-lucide="search-code"></i> No results found. You didn't pick a topic!</p>
+        </div>
+        {% endfor %}
+    </div>
+
     <h2 class="section-title"><i data-lucide="bookmark"></i> Saved Posts</h2>
 
     <div class="history-container">
         {% if save_posts %}
             {% for title, item in save_posts.items() %}
-            <div class="history-card bookmark-card">
+            <div class="history-card bookmark-card" style="max-width: 300px !important; width: 100% !important;">
                 <div class="history-card-header">
                     <h3><i data-lucide="file-text"></i> {{ title }}</h3> 
                 </div>
+
                 <div class="timeline-section">
                     <p class="bookmark-description">
                         {{ item['description'] }}
                     </p>
                 </div>
-                <div style="margin-top: 1rem;">
+
+                <div class="bookmark-footer">
                     <a href="{{item['url']}}" target="_blank" rel="noopener noreferrer" class="read-more-btn">
                         Read Saved Article <i data-lucide="external-link"></i>
                     </a>
@@ -94,5 +124,3 @@
     </script>
 </body>
 </html>
-
-<!-- user_history.html -->

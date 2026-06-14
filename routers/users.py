@@ -7,12 +7,13 @@ from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
 
 from database import get_database_connection
-from intersects import get_status
+from routers.intersects import get_status
+from message import send_welcome_email
 
 
 router = APIRouter()
 
-templates = Jinja2Templates(directory="staticGit")
+templates = Jinja2Templates(directory="html")
 
 
 # הרשמת משתמש חדש
@@ -65,6 +66,11 @@ def register_user(
 
     cursor.close()
     connection.close()
+
+    send_welcome_email(
+        username,
+        email
+    )
 
     return templates.TemplateResponse(
         request = request,
