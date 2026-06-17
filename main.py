@@ -14,7 +14,6 @@ from news_service import fetch_news_by_category
 app = FastAPI()
 
 
-# CSS
 app.mount(
     "/css",
     StaticFiles(directory = "css"),

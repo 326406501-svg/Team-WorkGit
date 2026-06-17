@@ -116,3 +116,53 @@ td {
     border-radius: 10px;
     margin-bottom: 20px;
 }
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.search-form input {
+    padding: 10px;
+    border-radius: 8px;
+    border: none;
+    flex: 1;
+}
+
+.search-form button {
+    background: #6366f1;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.table-info {
+    color: #cbd5e1;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.pagination button {
+    background: #334155;
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.pagination button:hover {
+    background: #475569;
+}

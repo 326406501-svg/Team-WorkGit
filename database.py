@@ -73,16 +73,26 @@ def create_tables():
     );
     """)
 
-    # טבלת היסטוריית צפייה
+    # Indexes for faster searches in large systems
+
     cursor.execute("""
-    CREATE TABLE IF NOT EXISTS history (
-        id SERIAL PRIMARY KEY,
-        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
-        article_title TEXT NOT NULL,
-        article_url TEXT NOT NULL,
-        category VARCHAR(50),
-        viewed_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-    );
+    CREATE INDEX IF NOT EXISTS idx_users_username
+    ON users(username);
+    """)
+
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_comments_created_at
+    ON comments(created_at);
+    """)
+
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_history_viewed_at
+    ON history(viewed_at);
+    """)
+
+    cursor.execute("""
+    CREATE INDEX IF NOT EXISTS idx_users_email
+    ON users(email);
     """)
 
     connection.commit()
