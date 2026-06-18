@@ -1,0 +1,391 @@
+/* =====================================================
+   USER_HISTORY.CSS
+   Daily News Hub - History & Saved Articles
+   ===================================================== */
+
+/* =========================
+   Reset
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   Theme Colors
+========================= */
+
+:root {
+    --bg: #efe7d8;
+    --bg-soft: #f5ede1;
+    --card: #fbf5ea;
+    --card-light: #fffaf2;
+
+    --text: #2f2a24;
+    --text-soft: #4f473e;
+    --muted: #7a7168;
+
+    --border: #d6c8b8;
+    --border-dark: #b9aa99;
+
+    --accent: #8a3f2b;
+    --accent-hover: #6f2f20;
+
+    --danger: #9b2f2f;
+    --danger-hover: #7f2424;
+
+    --shadow: 0 14px 35px rgba(77, 61, 43, 0.10);
+}
+
+/* =========================
+   Page Base
+========================= */
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    padding: 35px 22px;
+    line-height: 1.6;
+}
+
+/* =========================
+   Header
+========================= */
+
+.welcome-header {
+    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto 30px;
+    padding-bottom: 22px;
+    border-bottom: 2px solid var(--border-dark);
+}
+
+.user-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-light);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.welcome-header h1 {
+    font-size: 46px;
+    color: var(--text);
+    margin-bottom: 8px;
+}
+
+.welcome-header h1 span {
+    color: var(--accent);
+}
+
+.welcome-header h2 {
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+/* =========================
+   Action Bar
+========================= */
+
+.action-bar {
+    max-width: 1200px;
+    margin: 0 auto 28px;
+}
+
+.back-home-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--accent);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+}
+
+.back-home-btn:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* =========================
+   Section Titles
+========================= */
+
+.section-title {
+    max-width: 1200px;
+    margin: 42px auto 22px;
+    color: var(--text);
+    font-size: 28px;
+    border-bottom: 1px solid var(--border-dark);
+    padding-bottom: 10px;
+}
+
+/* =========================
+   Containers
+========================= */
+
+.history-container,
+.news-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* =========================
+   History Cards
+========================= */
+
+.history-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+}
+
+.history-card,
+.news-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: 0.25s ease;
+}
+
+.history-card:hover,
+.news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(77, 61, 43, 0.14);
+}
+
+.history-card {
+    padding: 22px;
+}
+
+/* =========================
+   History Card Header
+========================= */
+
+.history-card-header h3 {
+    color: var(--text);
+    font-size: 21px;
+    line-height: 1.35;
+    margin-bottom: 12px;
+}
+
+.stats-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-light);
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    padding: 7px 12px;
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* =========================
+   Timeline
+========================= */
+
+.timeline-section {
+    margin-top: 18px;
+}
+
+.timeline-section h4 {
+    color: var(--text);
+    font-size: 17px;
+    margin-bottom: 12px;
+}
+
+.timeline-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.timeline-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--text-soft);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+}
+
+.timeline-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: var(--accent);
+}
+
+/* =========================
+   Popular Article Cards
+========================= */
+
+.news-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: center;
+}
+
+.news-card {
+    background: var(--card);
+}
+
+.card-image-wrapper {
+    background: #e2d4c2;
+    border-bottom: 1px solid var(--border);
+}
+
+.article-image {
+    display: block;
+    filter: sepia(4%) saturate(92%) contrast(98%);
+    transition: 0.35s ease;
+}
+
+.news-card:hover .article-image {
+    transform: scale(1.03);
+}
+
+.news-content-wrapper h3,
+.news-card h3 {
+    color: var(--text);
+    font-size: 21px;
+    line-height: 1.35;
+    margin-bottom: 10px;
+}
+
+.news-content-wrapper p,
+.news-card p {
+    color: var(--text-soft);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* =========================
+   Saved Posts
+========================= */
+
+.bookmark-card {
+    border-top: 4px solid var(--accent);
+}
+
+.bookmark-description {
+    color: var(--text-soft);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* =========================
+   Footer Buttons
+========================= */
+
+.card-footer,
+.bookmark-footer {
+    margin-top: 18px;
+}
+
+.read-more-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    color: var(--accent);
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 14px;
+    transition: 0.25s ease;
+}
+
+.read-more-btn:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* =========================
+   Empty State
+========================= */
+
+.empty-state {
+    text-align: center;
+    padding: 40px;
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   Danger Zone
+========================= */
+
+.danger-zone-wrapper {
+    max-width: 1200px;
+    margin: 55px auto 0;
+    background: #efe0d9;
+    border: 1px solid #c9a99a;
+    border-radius: 18px;
+    padding: 28px;
+    text-align: center;
+}
+
+.danger-action-btn {
+    background: var(--danger);
+    color: #fffaf2;
+    border: none;
+    padding: 13px 22px;
+    border-radius: 999px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.danger-action-btn:hover {
+    background: var(--danger-hover);
+    transform: translateY(-1px);
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 720px) {
+    body {
+        padding: 22px 15px;
+    }
+
+    .welcome-header h1 {
+        font-size: 34px;
+    }
+
+    .section-title {
+        font-size: 23px;
+    }
+
+    .history-container,
+    .news-container {
+        flex-direction: column;
+        align-items: center;
+    }
+}

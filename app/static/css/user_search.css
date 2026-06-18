@@ -1,0 +1,444 @@
+/* =====================================================
+   USER_SEARCH.CSS
+   Daily News Hub - News Feed Page
+   ===================================================== */
+
+/* =========================
+   Reset
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   Theme Colors
+========================= */
+
+:root {
+    --bg: #efe7d8;
+    --bg-soft: #f5ede1;
+    --card: #fbf5ea;
+    --card-light: #fffaf2;
+
+    --text: #2f2a24;
+    --text-soft: #4f473e;
+    --muted: #7a7168;
+
+    --border: #d6c8b8;
+    --border-dark: #b9aa99;
+
+    --accent: #8a3f2b;
+    --accent-hover: #6f2f20;
+
+    --success: #4f6f52;
+
+    --shadow: 0 14px 35px rgba(77, 61, 43, 0.10);
+}
+
+/* =========================
+   Page Base
+========================= */
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    padding: 35px 22px;
+    line-height: 1.6;
+}
+
+/* =========================
+   Header
+========================= */
+
+.welcome-header {
+    text-align: center;
+    max-width: 950px;
+    margin: 0 auto 40px;
+    padding-bottom: 22px;
+    border-bottom: 2px solid var(--border-dark);
+}
+
+.user-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--card-light);
+    color: var(--accent);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 999px;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 14px;
+}
+
+.user-badge i,
+.user-badge svg {
+    width: 15px;
+    height: 15px;
+}
+
+.welcome-header h1 {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+}
+
+.welcome-header h1 span {
+    color: var(--accent);
+}
+
+.welcome-header h2 {
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 17px;
+    font-weight: 400;
+}
+
+/* =========================
+   News Container
+========================= */
+
+.news-container {
+    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+/* =========================
+   News Card
+========================= */
+
+.news-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+    transition: 0.25s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 18px 40px rgba(77, 61, 43, 0.14);
+}
+
+/* =========================
+   Images
+========================= */
+
+.card-image-wrapper {
+    width: 100%;
+    height: 310px;
+    background: #e2d4c2;
+    overflow: hidden;
+    border-bottom: 1px solid var(--border);
+}
+
+.article-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: sepia(4%) saturate(92%) contrast(98%);
+    transition: 0.35s ease;
+}
+
+.news-card:hover .article-image {
+    transform: scale(1.03);
+}
+
+/* =========================
+   Card Header
+========================= */
+
+.card-header {
+    padding: 20px 26px 0;
+}
+
+.time-stamp {
+    color: var(--accent);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+
+.time-stamp i,
+.time-stamp svg {
+    width: 15px;
+    height: 15px;
+}
+
+/* =========================
+   Article Text
+========================= */
+
+.news-card h3 {
+    color: var(--text);
+    font-size: 30px;
+    line-height: 1.35;
+    padding: 12px 26px 8px;
+    font-weight: 700;
+}
+
+.news-card p {
+    color: var(--text-soft);
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    line-height: 1.8;
+    padding: 0 26px 22px;
+}
+
+/* =========================
+   Footer
+========================= */
+
+.card-footer {
+    border-top: 1px solid var(--border);
+    padding: 18px 26px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 18px;
+}
+
+.read-more-btn,
+.auto-submit-btn {
+    color: var(--accent);
+    background: transparent;
+    border: none;
+    text-decoration: none;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: 0.25s ease;
+}
+
+.read-more-btn:hover,
+.auto-submit-btn:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+.auto-submit-form,
+.form-div.personal-form {
+    display: inline-flex;
+    margin: 0;
+    padding: 0;
+}
+
+/* =========================
+   Comments Section
+========================= */
+
+.comments-section {
+    padding: 24px 26px;
+    border-top: 1px solid var(--border);
+    background: #f6ecdf;
+}
+
+.comments-section h4 {
+    color: var(--text);
+    font-size: 21px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.comments-section h4 i,
+.comments-section h4 svg {
+    width: 17px;
+    height: 17px;
+    color: var(--accent);
+}
+
+/* =========================
+   Comment Card
+========================= */
+
+.comment-card {
+    background: var(--card-light);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
+}
+
+.comment-card strong {
+    display: block;
+    color: var(--accent);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    margin-bottom: 6px;
+}
+
+.comment-card p {
+    padding: 0;
+    color: var(--text-soft);
+    font-size: 14px;
+    line-height: 1.6;
+    margin-bottom: 4px;
+}
+
+.comment-card small {
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+}
+
+.no-comments {
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    margin-bottom: 14px;
+}
+
+/* =========================
+   Comment Form
+========================= */
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 14px;
+}
+
+.comment-form textarea {
+    width: 100%;
+    min-height: 95px;
+    resize: vertical;
+    border: 1px solid var(--border);
+    background: var(--card-light);
+    color: var(--text);
+    border-radius: 12px;
+    padding: 13px 14px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: 0.25s ease;
+}
+
+.comment-form textarea:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(138, 63, 43, 0.10);
+}
+
+.comment-form textarea::placeholder {
+    color: var(--muted);
+}
+
+.comment-btn {
+    align-self: flex-start;
+    background: var(--accent);
+    color: #fffaf2;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 999px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    transition: 0.25s ease;
+}
+
+.comment-btn:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+/* =========================
+   See More
+========================= */
+
+.see-more-form {
+    width: 100%;
+    max-width: 900px;
+    margin: 30px auto 0;
+    display: flex;
+    justify-content: center;
+}
+
+.see-more-form .auto-submit-btn {
+    background: var(--accent);
+    color: #fffaf2;
+    padding: 12px 22px;
+    border-radius: 999px;
+    text-decoration: none;
+}
+
+.see-more-form .auto-submit-btn:hover {
+    background: var(--accent-hover);
+    color: #fffaf2;
+    text-decoration: none;
+}
+
+/* =========================
+   Empty State
+========================= */
+
+.empty-state {
+    text-align: center;
+    padding: 45px;
+    color: var(--muted);
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 720px) {
+    body {
+        padding: 22px 15px;
+    }
+
+    .welcome-header h1 {
+        font-size: 34px;
+    }
+
+    .welcome-header h2 {
+        font-size: 15px;
+    }
+
+    .card-image-wrapper {
+        height: 220px;
+    }
+
+    .news-card h3 {
+        font-size: 23px;
+    }
+
+    .news-card p {
+        font-size: 14px;
+    }
+
+    .card-footer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
