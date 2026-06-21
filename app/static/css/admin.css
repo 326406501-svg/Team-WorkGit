@@ -1,0 +1,385 @@
+/* =====================================================
+   ADMIN.CSS
+   Daily News Hub - Unified Warm Editorial Theme
+   ===================================================== */
+
+/* =========================
+   Reset
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* =========================
+   Theme Colors
+========================= */
+
+:root {
+    --bg: #efe7d8;
+    --bg-soft: #f4ecdf;
+    --card: #fbf5ea;
+    --card-light: #fffaf2;
+
+    --text: #2f2a24;
+    --text-soft: #4f473e;
+    --muted: #7a7168;
+
+    --border: #d6c8b8;
+    --border-dark: #b9aa99;
+
+    --accent: #8a3f2b;
+    --accent-hover: #6f2f20;
+
+    --danger: #9b2f2f;
+    --danger-hover: #7f2424;
+
+    --success: #4f6f52;
+    --success-hover: #3f5b42;
+
+    --shadow: 0 14px 35px rgba(77, 61, 43, 0.10);
+}
+
+/* =========================
+   Page Base
+========================= */
+
+body {
+    min-height: 100vh;
+    background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+    color: var(--text);
+    font-family: Georgia, "Times New Roman", serif;
+    padding: 40px;
+    line-height: 1.6;
+}
+
+/* =========================
+   Admin Login
+========================= */
+
+.admin-login-card {
+    max-width: 460px;
+    margin: 80px auto;
+    background: var(--card);
+    padding: 36px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    text-align: center;
+}
+
+.admin-login-card h1 {
+    margin-bottom: 12px;
+    font-size: 34px;
+    color: var(--text);
+    font-weight: 700;
+}
+
+.admin-login-card p {
+    margin-bottom: 24px;
+    color: var(--muted);
+    font-size: 16px;
+}
+
+.admin-login-card input {
+    width: 100%;
+    padding: 13px 14px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-light);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: 0.25s ease;
+}
+
+.admin-login-card input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(138, 63, 43, 0.12);
+}
+
+.admin-login-card button {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #fffaf2;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    font-size: 15px;
+    transition: 0.25s ease;
+}
+
+.admin-login-card button:hover {
+    background: var(--accent-hover);
+    transform: translateY(-1px);
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 700;
+}
+
+.back-link:hover {
+    color: var(--accent-hover);
+    text-decoration: underline;
+}
+
+/* =========================
+   Dashboard Layout
+========================= */
+
+.dashboard-container {
+    max-width: 1400px;
+    margin: auto;
+}
+
+.dashboard-container h1 {
+    text-align: center;
+    margin-bottom: 34px;
+    padding-bottom: 18px;
+    border-bottom: 2px solid var(--border-dark);
+    color: var(--text);
+    font-size: 42px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+/* =========================
+   Sections
+========================= */
+
+.section {
+    background: var(--card);
+    padding: 26px;
+    border-radius: 18px;
+    border: 1px solid var(--border);
+    margin-bottom: 30px;
+    box-shadow: var(--shadow);
+}
+
+.section h2 {
+    margin-bottom: 18px;
+    color: var(--text);
+    font-size: 27px;
+    font-weight: 700;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 10px;
+}
+
+/* =========================
+   Search Forms
+========================= */
+
+.search-form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 16px;
+}
+
+.search-form input {
+    flex: 1;
+    padding: 11px 13px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: var(--card-light);
+    color: var(--text);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    outline: none;
+    transition: 0.25s ease;
+}
+
+.search-form input::placeholder {
+    color: var(--muted);
+}
+
+.search-form input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(138, 63, 43, 0.10);
+}
+
+.search-form button {
+    background: var(--accent);
+    color: #fffaf2;
+    border: none;
+    padding: 11px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    transition: 0.25s ease;
+}
+
+.search-form button:hover {
+    background: var(--accent-hover);
+}
+
+/* =========================
+   Info Text
+========================= */
+
+.table-info {
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-size: 14px;
+    font-family: Arial, sans-serif;
+}
+
+/* =========================
+   Tables
+========================= */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-light);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+th {
+    background: #d8c7b5;
+    color: var(--text);
+    padding: 13px;
+    text-align: left;
+    font-family: Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.4px;
+}
+
+td {
+    padding: 13px;
+    border-top: 1px solid var(--border);
+    color: var(--text-soft);
+    background: var(--card-light);
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    vertical-align: top;
+}
+
+tr:hover td {
+    background: #f4eadc;
+}
+
+/* =========================
+   Action Buttons
+========================= */
+
+.delete-btn {
+    background: var(--danger);
+    color: #fffaf2;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    transition: 0.25s ease;
+}
+
+.delete-btn:hover {
+    background: var(--danger-hover);
+    transform: translateY(-1px);
+}
+
+.send-btn {
+    background: var(--success);
+    color: #fffaf2;
+    border: none;
+    padding: 13px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    transition: 0.25s ease;
+}
+
+.send-btn:hover {
+    background: var(--success-hover);
+    transform: translateY(-1px);
+}
+
+/* =========================
+   Messages
+========================= */
+
+.success-message {
+    background: #e5efdf;
+    color: var(--success-hover);
+    border: 1px solid #bccfb4;
+    padding: 15px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+}
+
+/* =========================
+   Pagination
+========================= */
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background: #d8c7b5;
+    color: var(--text);
+    border: 1px solid var(--border-dark);
+    padding: 10px 16px;
+    border-radius: 9px;
+    cursor: pointer;
+    font-family: Arial, sans-serif;
+    font-weight: 700;
+    transition: 0.25s ease;
+}
+
+.pagination button:hover {
+    background: var(--accent);
+    color: #fffaf2;
+    border-color: var(--accent);
+}
+
+/* =========================
+   Responsive
+========================= */
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .dashboard-container h1 {
+        font-size: 32px;
+    }
+
+    .section {
+        padding: 20px;
+    }
+
+    .search-form {
+        flex-direction: column;
+    }
+
+    table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+}

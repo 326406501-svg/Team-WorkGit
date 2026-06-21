@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/admin.css') }}">
+</head>
+<body>
+
+    <div class="dashboard-container">
+
+        <h1>Admin Dashboard</h1>
+
+        {% if message %}
+            <div class="success-message">
+                {{ message }}
+            </div>
+        {% endif %}
+
+        <div class="section">
+
+            <h2>Users</h2>
+
+            <form action="/admin/dashboard/filter" method="post" class="search-form">
+                <input type="hidden" name="admin_username" value="{{ admin_username }}">
+                <input type="hidden" name="admin_password" value="{{ admin_password }}">
+                <input type="hidden" name="comments_search" value="{{ comments_search }}">
+                <input type="hidden" name="comments_offset" value="{{ comments_offset }}">
+                <input type="hidden" name="users_offset" value="0">
+
+                <input type="text" name="search" value="{{ search }}" placeholder="Search users">
+                <button type="submit">Search</button>
+            </form>
+
+            <p class="table-info">
+                Showing {{ users|length }} of {{ total_users }} users
+            </p>
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Action</th>
+                </tr>
+
+                {% for user in users %}
+                <tr>
+                    <td>{{ user.id }}</td>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                    <td>{{ user.role }}</td>
+                    <td>
+                        <form action="/admin/delete_user" method="post">
+                            <input type="hidden" name="admin_username" value="{{ admin_username }}">
+                            <input type="hidden" name="admin_password" value="{{ admin_password }}">
+                            <input type="hidden" name="user_id" value="{{ user.id }}">
+                            <input type="hidden" name="search" value="{{ search }}">
+                            <input type="hidden" name="comments_search" value="{{ comments_search }}">
+                            <input type="hidden" name="users_offset" value="{{ users_offset }}">
+                            <input type="hidden" name="comments_offset" value="{{ comments_offset }}">
+
+                            <button type="submit" class="delete-btn">Delete User</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                {% if users|length == 0 %}
+                <tr>
+                    <td colspan="5">No users found.</td>
+                </tr>
+                {% endif %}
+            </table>
+
+            <div class="pagination">
+                {% if has_previous_users %}
+                <form action="/admin/dashboard/filter" method="post">
+                    <input type="hidden" name="admin_username" value="{{ admin_username }}">
+                    <input type="hidden" name="admin_password" value="{{ admin_password }}">
+                    <input type="hidden" name="search" value="{{ search }}">
+                    <input type="hidden" name="comments_search" value="{{ comments_search }}">
+                    <input type="hidden" name="users_offset" value="{{ users_previous_offset }}">
+                    <input type="hidden" name="comments_offset" value="{{ comments_offset }}">
+                    <button type="submit">Previous Users</button>
+                </form>
+                {% endif %}
+
+                {% if has_next_users %}
+                <form action="/admin/dashboard/filter" method="post">
+                    <input type="hidden" name="admin_username" value="{{ admin_username }}">
+                    <input type="hidden" name="admin_password" value="{{ admin_password }}">
+                    <input type="hidden" name="search" value="{{ search }}">
+                    <input type="hidden" name="comments_search" value="{{ comments_search }}">
+                    <input type="hidden" name="users_offset" value="{{ users_next_offset }}">
+                    <input type="hidden" name="comments_offset" value="{{ comments_offset }}">
+                    <button type="submit">Next Users</button>
+                </form>
+                {% endif %}
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h2>Comments</h2>
+
+            <form action="/admin/dashboard/filter" method="post" class="search-form">
+                <input type="hidden" name="admin_username" value="{{ admin_username }}">
+                <input type="hidden" name="admin_password" value="{{ admin_password }}">
+                <input type="hidden" name="search" value="{{ search }}">
+                <input type="hidden" name="users_offset" value="{{ users_offset }}">
+                <input type="hidden" name="comments_offset" value="0">
+
+                <input type="text" name="comments_search" value="{{ comments_search }}" placeholder="Search comments">
+                <button type="submit">Search</button>
+            </form>
+
+            <p class="table-info">
+                Showing {{ comments|length }} of {{ total_comments }} comments
+            </p>
+
+            <table>
+                <tr>
+                    <th>ID</th>
+                    <th>User</th>
+                    <th>Comment</th>
+                    <th>Action</th>
+                </tr>
+
+                {% for comment in comments %}
+                <tr>
+                    <td>{{ comment.id }}</td>
+                    <td>{{ comment.username }}</td>
+                    <td>{{ comment.comment_text }}</td>
+                    <td>
+                        <form action="/admin/delete_comment" method="post">
+                            <input type="hidden" name="admin_username" value="{{ admin_username }}">
+                            <input type="hidden" name="admin_password" value="{{ admin_password }}">
+                            <input type="hidden" name="comment_id" value="{{ comment.id }}">
+                            <input type="hidden" name="search" value="{{ search }}">
+                            <input type="hidden" name="comments_search" value="{{ comments_search }}">
+                            <input type="hidden" name="users_offset" value="{{ users_offset }}">
+                            <input type="hidden" name="comments_offset" value="{{ comments_offset }}">
+
+                            <button type="submit" class="delete-btn">Delete Comment</button>
+                        </form>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                {% if comments|length == 0 %}
+                <tr>
+                    <td colspan="4">No comments found.</td>
+                </tr>
+                {% endif %}
+            </table>
+
+            <div class="pagination">
+                {% if has_previous_comments %}
+                <form action="/admin/dashboard/filter" method="post">
+                    <input type="hidden" name="admin_username" value="{{ admin_username }}">
+                    <input type="hidden" name="admin_password" value="{{ admin_password }}">
+                    <input type="hidden" name="search" value="{{ search }}">
+                    <input type="hidden" name="comments_search" value="{{ comments_search }}">
+                    <input type="hidden" name="users_offset" value="{{ users_offset }}">
+                    <input type="hidden" name="comments_offset" value="{{ comments_previous_offset }}">
+                    <button type="submit">Previous Comments</button>
+                </form>
+                {% endif %}
+
+                {% if has_next_comments %}
+                <form action="/admin/dashboard/filter" method="post">
+                    <input type="hidden" name="admin_username" value="{{ admin_username }}">
+                    <input type="hidden" name="admin_password" value="{{ admin_password }}">
+                    <input type="hidden" name="search" value="{{ search }}">
+                    <input type="hidden" name="comments_search" value="{{ comments_search }}">
+                    <input type="hidden" name="users_offset" value="{{ users_offset }}">
+                    <input type="hidden" name="comments_offset" value="{{ comments_next_offset }}">
+                    <button type="submit">Next Comments</button>
+                </form>
+                {% endif %}
+            </div>
+
+        </div>
+
+
+        <div class="section">
+
+            <h2>News Update Emails</h2>
+
+            <form action="/admin/send_news_update" method="post">
+                <input type="hidden" name="admin_username" value="{{ admin_username }}">
+                <input type="hidden" name="admin_password" value="{{ admin_password }}">
+                <input type="hidden" name="search" value="{{ search }}">
+                <input type="hidden" name="comments_search" value="{{ comments_search }}">
+                <input type="hidden" name="users_offset" value="{{ users_offset }}">
+                <input type="hidden" name="comments_offset" value="{{ comments_offset }}">
+
+                <button type="submit" class="send-btn">
+                    Send News Update Preview
+                </button>
+            </form>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
